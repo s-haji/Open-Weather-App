@@ -8,11 +8,15 @@
     <fragment
         android:id="@+id/CityListFragment"
         android:name="com.suadahaji.weatherapp.ui.citylist.CityListFragment"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_city_list">
 
         <action
             android:id="@+id/action_CityListFragment_to_CityDetailFragment"
             app:destination="@id/CityDetailFragment" />
+        <action
+            android:id="@+id/action_CityListFragment_to_AddCityFragment"
+            app:destination="@id/AddCityFragment" />
     </fragment>
     <fragment
         android:id="@+id/CityDetailFragment"
@@ -22,4 +26,9 @@
             android:id="@+id/action_CityDetailFragment_to_CityListFragment"
             app:destination="@id/CityListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/AddCityFragment"
+        android:name="com.suadahaji.weatherapp.ui.addcity.AddCityFragment"
+        tools:layout="@layout/fragment_add_city"
+        android:label="@string/add_city_label" />
 </navigation>

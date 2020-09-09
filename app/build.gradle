@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 def getProperty(String filename, String propName) {
@@ -59,9 +60,15 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'com.google.android.material:material:1.2.0'
 
+    // Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
+
+    // Fragment Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // App Center dependencies
     implementation "com.microsoft.appcenter:appcenter-analytics:$app_center_sdk_version"
@@ -75,9 +82,6 @@ dependencies {
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
-    implementation 'com.google.android.material:material:1.2.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
