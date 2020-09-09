@@ -2,7 +2,9 @@ package com.suadahaji.weatherapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -10,6 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
+    private lateinit var navController: NavController
+
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
@@ -18,11 +22,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val navController = Navigation.findNavController(this, R.id.nav_host)
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            toolbar.title = navController.currentDestination?.label
-        }
+        navController = Navigation.findNavController(this, R.id.nav_host)
+        NavigationUI.setupActionBarWithNavController(this, navController)
+    }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
