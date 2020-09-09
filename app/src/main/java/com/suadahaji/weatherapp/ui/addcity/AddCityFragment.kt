@@ -72,7 +72,7 @@ class AddCityFragment : Fragment(), Injectable, HasAndroidInjector, OnMapReadyCa
         viewModel.fetchCityWeather()
 
         viewModel.weather.observe(viewLifecycleOwner, Observer {
-            if (!it.name.isEmpty()) {
+            if (it.name.isNotEmpty()) {
                 Toast.makeText(activity, it.name, Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
             } else {

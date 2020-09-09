@@ -41,6 +41,12 @@ class AddCityViewModel @Inject constructor(private val mainRepository: MainRepos
             )
             if (request.isSuccessful) {
                 _weather.value = request.body()
+                if (_weather.value!!.name.isNotEmpty()) {
+                    val response = request.body()
+                    response?.let {
+                        mainRepository.addCity(it)
+                    }
+                }
             } else {
                 _weather.value = null
                 Log.e(TAG, "fetchCityWeather: ${request.errorBody().toString()}")
