@@ -59,6 +59,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
+
     // App Center dependencies
     implementation "com.microsoft.appcenter:appcenter-analytics:$app_center_sdk_version"
     implementation "com.microsoft.appcenter:appcenter-crashes:$app_center_sdk_version"
