@@ -1,4 +1,4 @@
-package com.suadahaji.weatherapp.data.models
+package com.suadahaji.weatherapp.data.models.extras
 
 import com.google.gson.annotations.SerializedName
 

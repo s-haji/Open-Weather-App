@@ -3,7 +3,9 @@ package com.suadahaji.weatherapp.ui.citylist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.microsoft.appcenter.analytics.Analytics
 import com.suadahaji.weatherapp.data.api.WeatherResponse
+import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.data.repository.MainRepository
 import com.suadahaji.weatherapp.utils.NetworkState
 import kotlinx.coroutines.CoroutineScope
@@ -21,6 +23,10 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
     private var _weather = MutableLiveData<WeatherResponse>()
     val weather: LiveData<WeatherResponse>
         get() = _weather
+
+    private var _cities = MutableLiveData<List<CityModel>>()
+    val cities: LiveData<List<CityModel>>
+        get() = _cities
 
     private var _status = MutableLiveData<NetworkState>()
     val status: LiveData<NetworkState>
@@ -48,6 +54,24 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
             }
         } catch (e: Exception) {
             _status.value = NetworkState.error(e.message ?: "Unknown error")
+            Analytics.trackEvent(e.message)
+        }
+    }
+
+    fun fetchAllCities() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
+        try {
+            _status.value = NetworkState.LOADING
+            val request = mainRepository.fetchAllCities()
+            if (request.isNotEmpty()) {
+                _cities.value = request
+                _status.value = NetworkState.SUCCESS
+            } else {
+                _status.value = NetworkState.error("Error loading data from the database")
+                _weather.value = null
+            }
+        } catch (e: Exception) {
+            _status.value = NetworkState.error(e.message ?: "Unknown error")
+            Analytics.trackEvent(e.message)
         }
     }
 
@@ -55,6 +79,4 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
         super.onCleared()
         viewModelJob.cancel()
     }
-
-
 }
