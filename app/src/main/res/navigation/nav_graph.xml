@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/CityListFragment">
+
+    <fragment
+        android:id="@+id/CityListFragment"
+        android:name="com.suadahaji.weatherapp.ui.citylist.CityListFragment"
+        tools:layout="@layout/fragment_city_list">
+
+        <action
+            android:id="@+id/action_CityListFragment_to_CityDetailFragment"
+            app:destination="@id/CityDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CityDetailFragment"
+        android:name="com.suadahaji.weatherapp.ui.citydetail.CityDetailFragment"
+        tools:layout="@layout/fragment_city_detail">
+        <action
+            android:id="@+id/action_CityDetailFragment_to_CityListFragment"
+            app:destination="@id/CityListFragment" />
+    </fragment>
+</navigation>

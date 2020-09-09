@@ -1,21 +1,22 @@
-package com.suadahaji.weatherapp.ui.citylist
+package com.suadahaji.weatherapp.ui.addcity
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.microsoft.appcenter.analytics.Analytics
 import com.suadahaji.weatherapp.data.api.WeatherResponse
 import com.suadahaji.weatherapp.data.repository.MainRepository
-import com.suadahaji.weatherapp.utils.NetworkState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CityListViewModel @Inject constructor(private val mainRepository: MainRepository) :
+class AddCityViewModel @Inject constructor(private val mainRepository: MainRepository) :
     ViewModel() {
-    private val _cityName = MutableLiveData<String>()
+    private val _lat = MutableLiveData<String>()
+    private val _lon = MutableLiveData<String>()
     private val _units = MutableLiveData<String>()
 
     private var viewModelJob = Job()
@@ -23,32 +24,29 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
     val weather: LiveData<WeatherResponse>
         get() = _weather
 
-    private var _status = MutableLiveData<NetworkState>()
-    val status: LiveData<NetworkState>
-        get() = _status
 
-    fun setQuery(name: String?, units: String?) {
-        _cityName.value = name
+    fun setQuery(lat: String?, lon: String?, units: String?) {
+        _lat.value = lat
+        _lon.value = lon
         _units.value = units
     }
 
 
     fun fetchCityWeather() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
         try {
-            _status.value = NetworkState.LOADING
-            val request = mainRepository.fetchCityWeatherByName(
-                _cityName.value!!,
+            val request = mainRepository.fetchCityWeatherByLatLng(
+                _lat.value!!,
+                _lon.value!!,
                 _units.value!!
             )
             if (request.isSuccessful) {
                 _weather.value = request.body()
-                _status.value = NetworkState.SUCCESS
             } else {
-                _status.value = NetworkState.error(request.errorBody().toString())
                 _weather.value = null
+                Log.e(TAG, "fetchCityWeather: ${request.errorBody().toString()}")
             }
         } catch (e: Exception) {
-            _status.value = NetworkState.error(e.message ?: "Unknown error")
+            Log.e(TAG, "fetchCityWeather: ${e.message}")
             Analytics.trackEvent(e.message)
         }
     }
@@ -57,4 +55,9 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
         super.onCleared()
         viewModelJob.cancel()
     }
+
+    companion object {
+        private const val TAG = "CityListViewModel"
+    }
+
 }
