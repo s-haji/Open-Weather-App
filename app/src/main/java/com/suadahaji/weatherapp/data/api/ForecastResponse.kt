@@ -1,8 +1,8 @@
 package com.suadahaji.weatherapp.data.api
 
 import com.google.gson.annotations.SerializedName
-import com.suadahaji.weatherapp.data.models.City
-import com.suadahaji.weatherapp.data.models.Forecast
+import com.suadahaji.weatherapp.data.models.extras.City
+import com.suadahaji.weatherapp.data.models.extras.Forecast
 
 data class ForecastResponse (
     @field:SerializedName("cod")

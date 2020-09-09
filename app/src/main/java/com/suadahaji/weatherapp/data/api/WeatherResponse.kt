@@ -1,10 +1,10 @@
 package com.suadahaji.weatherapp.data.api
 
 import com.google.gson.annotations.SerializedName
-import com.suadahaji.weatherapp.data.models.Clouds
-import com.suadahaji.weatherapp.data.models.Main
-import com.suadahaji.weatherapp.data.models.Weather
 import com.suadahaji.weatherapp.data.models.Wind
+import com.suadahaji.weatherapp.data.models.extras.Clouds
+import com.suadahaji.weatherapp.data.models.extras.Main
+import com.suadahaji.weatherapp.data.models.extras.Weather
 
 data class WeatherResponse (
     @field:SerializedName("weather")
