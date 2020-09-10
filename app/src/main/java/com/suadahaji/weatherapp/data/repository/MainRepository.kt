@@ -10,13 +10,14 @@ import javax.inject.Singleton
 @Singleton
 class MainRepository @Inject constructor(
     private val weatherApiService: WeatherApiService,
-    private val weatherDao: WeatherDao
+    private val weatherDao: WeatherDao,
+    private val apiKey: String
 ) {
     suspend fun fetchCityWeatherByName(cityName: String, units: String) =
-        weatherApiService.getCityWeatherByName(cityName, units)
+        weatherApiService.getCityWeatherByName(apiKey, cityName, units)
 
     suspend fun fetchCityWeatherByLatLng(lat: String, lon: String, units: String) =
-        weatherApiService.getCityWeatherByLatLng(lat, lon, units)
+        weatherApiService.getCityWeatherByLatLng(apiKey, lat, lon, units)
 
     suspend fun fetchAllCities(): List<CityModel> = weatherDao.getAllCities()
 
@@ -37,5 +38,5 @@ class MainRepository @Inject constructor(
     }
 
     suspend fun fetchCityForecast(cityId: Int, units: String) =
-        weatherApiService.getCityForecast(cityId, units)
+        weatherApiService.getCityForecast(apiKey, cityId, units)
 }

@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import com.suadahaji.weatherapp.data.database.WeatherDao
 import com.suadahaji.weatherapp.data.database.WeatherDatabase
+import com.suadahaji.weatherapp.util.Keys
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -34,4 +35,19 @@ object AppModule {
     fun provideRepoDao(db: WeatherDatabase): WeatherDao {
         return db.weatherDao()
     }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideKeys(): Keys {
+        return Keys
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideApiKey(key: Keys): String {
+        return key.apiKey()
+    }
+
 }

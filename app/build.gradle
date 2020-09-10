@@ -6,21 +6,6 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
-def getProperty(String filename, String propName) {
-    def propsFile = rootProject.file(filename)
-    if (propsFile.exists()) {
-        def props = new Properties()
-        props.load(new FileInputStream(propsFile))
-        if (props[propName] != null) {
-            return props[propName]
-        } else {
-            print("No such property " + propName + " in file " + filename)
-        }
-    } else {
-        print(filename + " does not exist!")
-    }
-}
-
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
@@ -32,8 +17,6 @@ android {
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
-
-        buildConfigField "String", "API_KEY", "\"${getProperty("local.properties", "key")}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,6 +35,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    ndkVersion '21.3.6528147'
 }
 
 dependencies {
