@@ -28,7 +28,10 @@ class MainRepository @Inject constructor(
             weatherResponse.cod,
             weatherResponse.weather[0].description,
             weatherResponse.weather[0].icon,
-            weatherResponse.main.temp
+            weatherResponse.main.temp,
+            weatherResponse.sys.country,
+            weatherResponse.sys.sunrise,
+            weatherResponse.sys.sunset
         )
         weatherDao.bookmarkCity(city)
     }

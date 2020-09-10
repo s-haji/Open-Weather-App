@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.suadahaji.weatherapp.R
+import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.di.Injectable
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -18,7 +19,9 @@ import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.fragment_city_list.*
 import javax.inject.Inject
 
-class CityListFragment : Fragment(), Injectable, HasAndroidInjector {
+class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
+    CityListAdapter.ItemClickListener {
+
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
@@ -45,11 +48,20 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector {
 
         viewModel.fetchAllCities()
         viewModel.cities.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(activity, it.size, Toast.LENGTH_SHORT).show()
+            cityListRecyclerview.adapter = CityListAdapter(this, it)
         })
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
+    }
+
+    override fun onCityClicked(city: CityModel) {
+        Toast.makeText(activity, city.name, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCityLongClicked(city: CityModel): Boolean {
+        Toast.makeText(activity, city.description, Toast.LENGTH_SHORT).show()
+        return true
     }
 }

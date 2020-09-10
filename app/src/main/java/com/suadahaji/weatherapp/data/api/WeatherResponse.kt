@@ -5,6 +5,7 @@ import com.suadahaji.weatherapp.data.models.Wind
 import com.suadahaji.weatherapp.data.models.extras.Clouds
 import com.suadahaji.weatherapp.data.models.extras.Main
 import com.suadahaji.weatherapp.data.models.extras.Weather
+import com.suadahaji.weatherapp.data.models.extras.WeatherSys
 
 data class WeatherResponse (
     @field:SerializedName("weather")
@@ -12,15 +13,18 @@ data class WeatherResponse (
     @field:SerializedName("main")
     val main : Main,
     @field:SerializedName("wind")
-    val wind : Wind,
+    val wind: Wind,
     @field:SerializedName("clouds")
-    val clouds : Clouds,
+    val clouds: Clouds,
     @field:SerializedName("dt")
-    val dt : Int,
+    val dt: Int,
     @field:SerializedName("id")
-    val id : Int,
+    val id: Int,
     @field:SerializedName("name")
-    val name : String,
+    val name: String,
     @field:SerializedName("cod")
-    val cod : String
+    val cod: String,
+    @field:SerializedName("sys")
+    val sys: WeatherSys
+
 )

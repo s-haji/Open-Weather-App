@@ -65,5 +65,4 @@ class AddCityViewModel @Inject constructor(private val mainRepository: MainRepos
     companion object {
         private const val TAG = "CityListViewModel"
     }
-
 }
