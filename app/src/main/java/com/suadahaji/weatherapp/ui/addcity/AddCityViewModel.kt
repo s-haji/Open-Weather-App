@@ -6,11 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.microsoft.appcenter.analytics.Analytics
 import com.suadahaji.weatherapp.data.api.WeatherResponse
+import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.data.repository.MainRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 class AddCityViewModel @Inject constructor(private val mainRepository: MainRepository) :
@@ -44,7 +46,21 @@ class AddCityViewModel @Inject constructor(private val mainRepository: MainRepos
                 if (_weather.value!!.name.isNotEmpty()) {
                     val response = request.body()
                     response?.let {
-                        mainRepository.addCity(it)
+                        var city = CityModel(
+                            Date(System.currentTimeMillis()),
+                            it.dt,
+                            it.id,
+                            it.name,
+                            it.cod,
+                            it.weather[0].description,
+                            it.weather[0].icon,
+                            it.main.temp,
+                            it.sys.country,
+                            it.sys.sunrise,
+                            it.sys.sunset
+
+                        )
+                        mainRepository.addCity(city)
                     }
                 }
             } else {

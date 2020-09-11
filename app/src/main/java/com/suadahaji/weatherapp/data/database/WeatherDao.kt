@@ -11,7 +11,7 @@ interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun bookmarkCity(cityModel: CityModel)
 
-    @Query("SELECT * FROM cities")
+    @Query("SELECT * FROM cities ORDER BY dateAdded DESC")
     suspend fun getAllCities(): List<CityModel>
 
 }

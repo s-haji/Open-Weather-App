@@ -1,7 +1,6 @@
 package com.suadahaji.weatherapp.data.repository
 
 import com.suadahaji.weatherapp.data.api.WeatherApiService
-import com.suadahaji.weatherapp.data.api.WeatherResponse
 import com.suadahaji.weatherapp.data.database.WeatherDao
 import com.suadahaji.weatherapp.data.models.CityModel
 import javax.inject.Inject
@@ -21,19 +20,7 @@ class MainRepository @Inject constructor(
 
     suspend fun fetchAllCities(): List<CityModel> = weatherDao.getAllCities()
 
-    suspend fun addCity(weatherResponse: WeatherResponse) {
-        val city = CityModel(
-            weatherResponse.dt,
-            weatherResponse.id,
-            weatherResponse.name,
-            weatherResponse.cod,
-            weatherResponse.weather[0].description,
-            weatherResponse.weather[0].icon,
-            weatherResponse.main.temp,
-            weatherResponse.sys.country,
-            weatherResponse.sys.sunrise,
-            weatherResponse.sys.sunset
-        )
+    suspend fun addCity(city: CityModel) {
         weatherDao.bookmarkCity(city)
     }
 

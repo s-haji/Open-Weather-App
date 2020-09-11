@@ -9,15 +9,15 @@ import com.suadahaji.weatherapp.data.models.extras.WeatherSys
 
 data class WeatherResponse (
     @field:SerializedName("weather")
-    val weather : List<Weather>,
+    val weather: List<Weather>,
     @field:SerializedName("main")
-    val main : Main,
+    val main: Main,
     @field:SerializedName("wind")
     val wind: Wind,
     @field:SerializedName("clouds")
     val clouds: Clouds,
     @field:SerializedName("dt")
-    val dt: Int,
+    val dt: Long,
     @field:SerializedName("id")
     val id: Int,
     @field:SerializedName("name")
