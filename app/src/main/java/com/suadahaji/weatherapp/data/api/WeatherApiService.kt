@@ -1,26 +1,28 @@
 package com.suadahaji.weatherapp.data.api
 
-import com.suadahaji.weatherapp.BuildConfig
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherApiService {
-    @GET("weather?appid=${BuildConfig.API_KEY}")
+    @GET("weather")
     suspend fun getCityWeatherByName(
+        @Query("appid") appId: String,
         @Query("q") cityName: String,
         @Query("units") units: String
     ): Response<WeatherResponse>
 
-    @GET("weather?appid=${BuildConfig.API_KEY}")
+    @GET("weather")
     suspend fun getCityWeatherByLatLng(
+        @Query("appid") appId: String,
         @Query("lat") lat: String,
         @Query("lon") lon: String,
         @Query("units") units: String
     ): Response<WeatherResponse>
 
-    @GET("forecast?appid=${BuildConfig.API_KEY}")
+    @GET("forecast")
     suspend fun getCityForecast(
+        @Query("appid") appId: String,
         @Query("id") cityId: Int,
         @Query("units") units: String
     ): Response<ForecastResponse>
