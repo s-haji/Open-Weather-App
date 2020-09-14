@@ -7,7 +7,7 @@ import com.microsoft.appcenter.analytics.Analytics
 import com.suadahaji.weatherapp.data.api.WeatherResponse
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.data.repository.MainRepository
-import com.suadahaji.weatherapp.utils.NetworkState
+import com.suadahaji.weatherapp.util.NetworkState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

@@ -1,4 +1,4 @@
-package com.suadahaji.weatherapp.utils
+package com.suadahaji.weatherapp.util
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -3,7 +3,7 @@ package com.suadahaji.weatherapp.di
 import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.suadahaji.weatherapp.data.api.WeatherApiService
-import com.suadahaji.weatherapp.utils.isNetworkAvailable
+import com.suadahaji.weatherapp.util.isNetworkAvailable
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
