@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -48,7 +49,9 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
 
         viewModel.fetchAllCities()
         viewModel.cities.observe(viewLifecycleOwner, Observer {
-            cityListRecyclerview.adapter = CityListAdapter(this, it)
+            val adapter = CityListAdapter(this, it)
+            cityListRecyclerview.adapter = adapter
+            adapter.notifyDataSetChanged()
         })
     }
 
@@ -61,7 +64,25 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
     }
 
     override fun onCityLongClicked(city: CityModel): Boolean {
-        Toast.makeText(activity, city.description, Toast.LENGTH_SHORT).show()
+        val alertDialog = activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.apply {
+                setMessage(R.string.delete_city)
+                setPositiveButton(
+                    R.string.delete
+                ) { dialog, _ ->
+                    viewModel.deleteCity(city)
+                    dialog.dismiss()
+                }
+                setNegativeButton(
+                    R.string.cancel
+                ) { dialog, _ ->
+                    dialog.dismiss()
+                }
+            }
+            builder.create()
+        }
+        alertDialog?.show()
         return true
     }
 }

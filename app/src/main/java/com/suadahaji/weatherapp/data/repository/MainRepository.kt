@@ -24,6 +24,10 @@ class MainRepository @Inject constructor(
         weatherDao.bookmarkCity(city)
     }
 
+    suspend fun deleteCity(city: CityModel) {
+        weatherDao.deleteCity(city)
+    }
+
     suspend fun fetchCityForecast(cityId: Int, units: String) =
         weatherApiService.getCityForecast(apiKey, cityId, units)
 }
