@@ -3,7 +3,6 @@ package com.suadahaji.weatherapp.ui.citylist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.microsoft.appcenter.analytics.Analytics
 import com.suadahaji.weatherapp.data.api.WeatherResponse
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.data.repository.MainRepository
@@ -54,7 +53,6 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
             }
         } catch (e: Exception) {
             _status.value = NetworkState.error(e.message ?: "Unknown error")
-            Analytics.trackEvent(e.message)
         }
     }
 
@@ -71,7 +69,6 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
             }
         } catch (e: Exception) {
             _status.value = NetworkState.error(e.message ?: "Unknown error")
-            Analytics.trackEvent(e.message)
         }
     }
 
