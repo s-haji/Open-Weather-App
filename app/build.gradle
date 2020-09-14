@@ -60,10 +60,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
-    // App Center dependencies
-    implementation "com.microsoft.appcenter:appcenter-analytics:$app_center_sdk_version"
-    implementation "com.microsoft.appcenter:appcenter-crashes:$app_center_sdk_version"
-
     // Retrofit
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
