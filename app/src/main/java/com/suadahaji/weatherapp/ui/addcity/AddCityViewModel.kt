@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.microsoft.appcenter.analytics.Analytics
 import com.suadahaji.weatherapp.data.api.WeatherResponse
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.data.repository.MainRepository
@@ -68,8 +67,7 @@ class AddCityViewModel @Inject constructor(private val mainRepository: MainRepos
                 Log.e(TAG, "fetchCityWeather: ${request.errorBody().toString()}")
             }
         } catch (e: Exception) {
-            Log.e(TAG, "fetchCityWeather: ${e.message}")
-            Analytics.trackEvent(e.message)
+            Log.e(TAG, "Error: ${e.message}")
         }
     }
 
