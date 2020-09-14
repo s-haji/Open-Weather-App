@@ -16,4 +16,6 @@
 app/src/debug/
 app/src/release/
 app/src/main/cpp/native-lib.cpp
+app/lint/
+lint/
 
