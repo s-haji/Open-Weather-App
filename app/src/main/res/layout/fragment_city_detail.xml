@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.citydetail.CityDetailFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/cityName"
+    <data>
+
+        <variable
+            name="cityViewModel"
+            type="com.suadahaji.weatherapp.ui.citydetail.CityDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="love" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        tools:context=".ui.citydetail.CityDetailFragment">
+
+        <TextView
+            android:id="@+id/cityName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@{cityViewModel.forecast.city.country}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hajisuada.myweatherapp.di.WeatherViewModelFactory
 import com.suadahaji.weatherapp.ui.addcity.AddCityViewModel
+import com.suadahaji.weatherapp.ui.citydetail.CityDetailViewModel
 import com.suadahaji.weatherapp.ui.citylist.CityListViewModel
 import dagger.Binds
 import dagger.Module
@@ -20,6 +21,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddCityViewModel::class)
     abstract fun bindAddCityViewModel(addCityViewModel: AddCityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CityDetailViewModel::class)
+    abstract fun bindCityDetailViewModel(cityDetailViewModel: CityDetailViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: WeatherViewModelFactory): ViewModelProvider.Factory

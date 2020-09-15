@@ -52,7 +52,6 @@ class CityDetailViewModel @Inject constructor(private val mainRepository: MainRe
                         it.city.country,
                         it.city.sunrise,
                         it.city.sunset
-
                     )
                     mainRepository.addCity(city)
                 }
