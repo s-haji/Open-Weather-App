@@ -13,8 +13,6 @@ data class CityModel(
     val id: Int,
     @field:SerializedName("name")
     val name: String,
-    @field:SerializedName("cod")
-    val main: String,
     @field:SerializedName("description")
     val description: String,
     @field:SerializedName("icon")
@@ -23,8 +21,8 @@ data class CityModel(
     val temp: Double,
     @field:SerializedName("country")
     val country: String,
-    @field:SerializedName("dt")
+    @field:SerializedName("sunrise")
     val sunrise: Int,
-    @field:SerializedName("dt")
+    @field:SerializedName("sunset")
     val sunset: Int
 )

@@ -26,4 +26,11 @@ interface WeatherApiService {
         @Query("id") cityId: Int,
         @Query("units") units: String
     ): Response<ForecastResponse>
+
+    @GET("find")
+    suspend fun getCities(
+        @Query("appid") appId: String,
+        @Query("q") lat: String,
+        @Query("units") units: String
+    ): Response<CitiesResponse>
 }

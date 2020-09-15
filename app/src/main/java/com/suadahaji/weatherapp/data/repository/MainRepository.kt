@@ -30,4 +30,7 @@ class MainRepository @Inject constructor(
 
     suspend fun fetchCityForecast(cityId: Int, units: String) =
         weatherApiService.getCityForecast(apiKey, cityId, units)
+
+    suspend fun fetchCities(cityName: String, units: String) =
+        weatherApiService.getCities(apiKey, cityName, units)
 }
