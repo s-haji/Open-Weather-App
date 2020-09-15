@@ -2,4 +2,7 @@
     <string name="app_name">Weather App</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="add_city_label">Add City</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_city">Delete City?</string>
 </resources>
