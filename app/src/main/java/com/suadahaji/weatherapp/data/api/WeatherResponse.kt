@@ -22,8 +22,6 @@ data class WeatherResponse (
     val id: Int,
     @field:SerializedName("name")
     val name: String,
-    @field:SerializedName("cod")
-    val cod: String,
     @field:SerializedName("sys")
     val sys: WeatherSys
 

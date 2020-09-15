@@ -50,7 +50,6 @@ class AddCityViewModel @Inject constructor(private val mainRepository: MainRepos
                             it.dt,
                             it.id,
                             it.name,
-                            it.cod,
                             it.weather[0].description,
                             it.weather[0].icon,
                             it.main.temp,
@@ -77,6 +76,6 @@ class AddCityViewModel @Inject constructor(private val mainRepository: MainRepos
     }
 
     companion object {
-        private const val TAG = "CityListViewModel"
+        private const val TAG = "AddCityViewModel"
     }
 }
