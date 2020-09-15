@@ -7,13 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.data.api.WeatherResponse
+import com.suadahaji.weatherapp.data.models.CityModel
+import java.util.*
 
 class CitySearchAdapter(
     private var listener: ItemClickListener,
     private var cities: List<WeatherResponse>
 ) : RecyclerView.Adapter<CitySearchAdapter.CityViewHolder>() {
     interface ItemClickListener {
-        fun onCityClicked(cityId: Int)
+        fun onItemClicked(cityModel: CityModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
@@ -26,8 +28,21 @@ class CitySearchAdapter(
         holder.cityName.setText(cities[position].name + ", " + cities[position].sys.country)
         holder.weatherDescription.setText(cities[position].weather[0].description)
 
+
         holder.itemView.setOnClickListener {
-            listener.onCityClicked(cities[position].id)
+            val city =  CityModel(
+            Date(System.currentTimeMillis()),
+            cities[position].dt,
+                cities[position].id,
+                cities[position].name,
+                cities[position].weather[0].description,
+                cities[position].weather[0].icon,
+                cities[position].main.temp,
+                cities[position].sys.country,
+                cities[position].sys.sunrise,
+                cities[position].sys.sunset
+            )
+            listener.onItemClicked(city)
         }
     }
 

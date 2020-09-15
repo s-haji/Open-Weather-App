@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import com.suadahaji.weatherapp.data.api.ForecastResponse
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.data.repository.MainRepository
+import com.suadahaji.weatherapp.util.NetworkState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 class CityDetailViewModel @Inject constructor(private val mainRepository: MainRepository) :
@@ -24,6 +24,13 @@ class CityDetailViewModel @Inject constructor(private val mainRepository: MainRe
     val forecast: LiveData<ForecastResponse>
         get() = _forecast
 
+    private var _city = MutableLiveData<CityModel>()
+    val city: LiveData<CityModel>
+        get() = _city
+
+    private var _status = MutableLiveData<NetworkState>()
+    val status: LiveData<NetworkState>
+        get() = _status
 
     fun setQuery(cityId: Int?, units: String?) {
         this.cityId.value = cityId
@@ -33,30 +40,31 @@ class CityDetailViewModel @Inject constructor(private val mainRepository: MainRe
 
     fun fetchCityWeather() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
         try {
+            _status.value = NetworkState.LOADING
             val request = mainRepository.fetchCityForecast(
                 cityId.value!!,
                 _units.value!!
             )
+
             _forecast.value = request.body()
             if (request.isSuccessful) {
+                _status.value = NetworkState.SUCCESS
                 val response = request.body()
                 response?.let {
-                    val city = CityModel(
-                        Date(System.currentTimeMillis()),
-                        it.forecasts[0].dt,
-                        it.city.id,
-                        it.city.name,
-                        it.forecasts[0].weather[0].description,
-                        it.forecasts[0].weather[0].icon,
-                        it.forecasts[0].main.temp,
-                        it.city.country,
-                        it.city.sunrise,
-                        it.city.sunset
-                    )
-                    mainRepository.addCity(city)
+                    val cityModel = mainRepository.getCity(cityId.value!!)
+                    cityModel.dt = it.forecasts[0].dt
+                    cityModel.description = it.forecasts[0].weather[0].description
+                    cityModel.icon = it.forecasts[0].weather[0].icon
+                    cityModel.temp = it.forecasts[0].main.temp
+                    cityModel.sunrise = it.city.sunrise
+                    cityModel.sunset = it.city.sunset
+
+                    mainRepository.update(cityModel)
+                    _city.value = cityModel
                 }
             }
         } catch (e: Exception) {
+            _status.value = NetworkState.error(e.message ?: "Unknown error")
             Log.e(TAG, "Error: ${e.message}")
         }
     }
