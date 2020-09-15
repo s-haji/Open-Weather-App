@@ -1,8 +1,10 @@
 package com.suadahaji.weatherapp.ui.citylist
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.suadahaji.weatherapp.data.api.WeatherResponse
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.data.repository.MainRepository
 import com.suadahaji.weatherapp.util.NetworkState
@@ -22,6 +24,10 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
     private var _cities = MutableLiveData<List<CityModel>>()
     val cities: LiveData<List<CityModel>>
         get() = _cities
+
+    private var _searchCities = MutableLiveData<List<WeatherResponse>>()
+    val searchCities: LiveData<List<WeatherResponse>>
+        get() = _searchCities
 
     private var _status = MutableLiveData<NetworkState>()
     val status: LiveData<NetworkState>
@@ -62,6 +68,19 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
 
     override fun onCleared() {
         super.onCleared()
-//        viewModelJob.cancel()
+        viewModelJob.cancel()
+    }
+
+    fun searchCities() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
+        try {
+            val request = mainRepository.fetchCities(_cityName.value!!, _units.value!!)
+            _searchCities.value = request.body()?.list
+        } catch (e: Exception) {
+            Log.e(TAG, "Error: ${e.message}")
+        }
+    }
+
+    companion object {
+        private const val TAG = "CityListViewModel"
     }
 }

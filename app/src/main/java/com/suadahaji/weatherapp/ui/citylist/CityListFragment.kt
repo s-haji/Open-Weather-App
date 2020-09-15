@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -21,13 +22,17 @@ import kotlinx.android.synthetic.main.fragment_city_list.*
 import javax.inject.Inject
 
 class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
-    CityListAdapter.ItemClickListener {
+    CityListAdapter.ItemClickListener, SearchView.OnQueryTextListener,
+    CitySearchAdapter.ItemClickListener {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val units: String?
+        get() = "metric"
 
     private val viewModel: CityListViewModel by viewModels { viewModelFactory }
 
@@ -53,6 +58,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
             cityListRecyclerview.adapter = adapter
             adapter.notifyDataSetChanged()
         })
+        citySearchView.setOnQueryTextListener(this)
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
@@ -84,5 +90,36 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
         }
         alertDialog?.show()
         return true
+    }
+
+    override fun onQueryTextSubmit(p0: String): Boolean {
+        if (p0.isNotEmpty()) {
+            viewModel.setQuery(p0, units)
+            viewModel.searchCities()
+            viewModel.searchCities.observe(viewLifecycleOwner, Observer {
+                searchRecyclerView.adapter = CitySearchAdapter(this, it)
+                if (it.isNotEmpty()) {
+                    emptySearch.visibility = View.GONE
+                    searchRecyclerView.visibility = View.VISIBLE
+                } else {
+                    emptySearch.visibility = View.VISIBLE
+                    searchRecyclerView.visibility = View.GONE
+                }
+            })
+        }
+        return false
+    }
+
+    override fun onQueryTextChange(p0: String): Boolean {
+        if (p0.isEmpty()) {
+            searchRecyclerView.adapter = CitySearchAdapter(this, emptyList())
+            emptySearch.visibility = View.GONE
+            searchRecyclerView.visibility = View.GONE
+        }
+        return false
+    }
+
+    override fun onCityClicked(cityId: Int) {
+        Toast.makeText(activity, "Suada $cityId", Toast.LENGTH_SHORT).show()
     }
 }

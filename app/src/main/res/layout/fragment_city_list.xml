@@ -15,11 +15,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_location" />
 
+    <SearchView
+        android:id="@+id/citySearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search for a city"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/citySearchView"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="50dp"
+        android:elevation="5dp"
+        android:background="@android:color/white"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/citySearchView"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_city_search" />
+
+    <TextView
+        android:id="@+id/emptySearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="City not found"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/citySearchView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cityListRecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/citySearchView"
         tools:itemCount="10"
         tools:listitem="@layout/item_city" />
 </androidx.constraintlayout.widget.ConstraintLayout>
