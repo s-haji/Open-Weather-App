@@ -66,6 +66,11 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
     }
 
     override fun onCityClicked(city: CityModel) {
+        findNavController().navigate(
+            CityListFragmentDirections.actionCityListFragmentToCityDetailFragment(
+                city.id
+            )
+        )
         Toast.makeText(activity, city.name, Toast.LENGTH_SHORT).show()
     }
 
@@ -121,5 +126,10 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
 
     override fun onCityClicked(cityId: Int) {
         Toast.makeText(activity, "Suada $cityId", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(
+            CityListFragmentDirections.actionCityListFragmentToCityDetailFragment(
+                cityId
+            )
+        )
     }
 }

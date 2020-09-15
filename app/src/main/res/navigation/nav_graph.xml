@@ -25,10 +25,14 @@
         <action
             android:id="@+id/action_CityDetailFragment_to_CityListFragment"
             app:destination="@id/CityListFragment" />
+        <argument
+            android:name="cityId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/AddCityFragment"
         android:name="com.suadahaji.weatherapp.ui.addcity.AddCityFragment"
         tools:layout="@layout/fragment_add_city"
-        android:label="@string/add_city_label" />
+        android:label="@string/add_city_label"></fragment>
 </navigation>
