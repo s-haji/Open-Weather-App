@@ -2,12 +2,23 @@ package com.suadahaji.weatherapp.util
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.suadahaji.weatherapp.R
 
 @BindingAdapter("checkVisibility")
 fun View.checkVisibility(it: Boolean) {
     visibility = if (it) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("capitalizeSentence")
+fun TextView.capitalizeSentence(description: String) {
+    var retStr = description
+    try { // We can face index out of bound exception if the string is null
+        retStr = description.substring(0, 1).toUpperCase() + description.substring(1)
+    } catch (e: Exception) {
+    }
+    text = retStr
 }
 
 @BindingAdapter("setImage")

@@ -23,6 +23,9 @@ object NetworkModule {
         context: Context
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .followRedirects(true)
+            .followSslRedirects(true)
+            .retryOnConnectionFailure(true)
             .cache(Cache(context.applicationContext.cacheDir, (10 * 1024 * 1024).toLong()))
             .addNetworkInterceptor { chain ->
                 val originalResponse = chain.proceed(chain.request())

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Weather" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+
+    <style name="Weather.Day">
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorOnPrimary">@android:color/black</item>
+        <item name="colorSecondary">@color/weather_700</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="android:colorBackground">@android:color/white</item>
+
+    </style>
+
+    <style name="Custom.ActionBar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="titleTextColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <color name="immersive_sys_ui">#33000000</color>
+</resources>
