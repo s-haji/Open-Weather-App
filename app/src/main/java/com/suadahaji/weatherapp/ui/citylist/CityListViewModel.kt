@@ -18,6 +18,7 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
     ViewModel() {
     private val _cityName = MutableLiveData<String>()
     private val _units = MutableLiveData<String>()
+    private val city = MutableLiveData<CityModel>()
 
     private var viewModelJob = Job()
 
@@ -36,6 +37,10 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
     fun setQuery(name: String?, units: String?) {
         _cityName.value = name
         _units.value = units
+    }
+
+    fun getCity(cityModel: CityModel) {
+        city.value = cityModel
     }
 
 
@@ -76,7 +81,15 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
             val request = mainRepository.fetchCities(_cityName.value!!, _units.value!!)
             _searchCities.value = request.body()?.list
         } catch (e: Exception) {
-            Log.e(TAG, "Error: ${e.message}")
+            Log.e(TAG, "searchCities error: ${e.message}")
+        }
+    }
+
+    fun addCity() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
+        try {
+            mainRepository.addCity(city.value!!)
+        } catch (e: Exception) {
+            Log.e(TAG, "addCity error: ${e.message}")
         }
     }
 

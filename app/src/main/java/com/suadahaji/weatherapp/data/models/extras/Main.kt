@@ -14,5 +14,5 @@ data class Main (
     @field:SerializedName("pressure")
     val pressure : Int,
     @field:SerializedName("humidity")
-    val humidity : Int
+    val humidity : Float
 )

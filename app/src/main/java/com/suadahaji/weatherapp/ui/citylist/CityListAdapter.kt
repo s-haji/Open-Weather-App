@@ -1,12 +1,10 @@
 package com.suadahaji.weatherapp.ui.citylist
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.data.models.CityModel
+import com.suadahaji.weatherapp.databinding.ItemCityBinding
 
 class CityListAdapter(
     private var listener: ItemClickListener,
@@ -18,19 +16,17 @@ class CityListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_city, parent, false)
-        return CityViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ItemCityBinding.inflate(layoutInflater, parent, false)
+        return CityViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
-        holder.cityName.setText(cities[position].name)
-        holder.weatherDescription.setText(cities[position].description)
-
-        holder.itemView.setOnClickListener {
+        holder.bind(cities[position])
+        holder.binding.root.setOnClickListener {
             listener.onCityClicked(cities[position])
         }
-        holder.itemView.setOnLongClickListener { v ->
+        holder.binding.root.setOnLongClickListener { v ->
             v.isSelected = true
             listener.onCityLongClicked(cities[position])
         }
@@ -40,10 +36,9 @@ class CityListAdapter(
         return cities.size
     }
 
-    class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cityName = itemView.findViewById<TextView>(R.id.cityName)
-        val weatherDescription = itemView.findViewById<TextView>(R.id.weatherDescription)
-        val cityTemp = itemView.findViewById<TextView>(R.id.cityTemp)
+    class CityViewHolder(val binding: ItemCityBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(city: CityModel) {
+            binding.cityModel = city
+        }
     }
-
 }
