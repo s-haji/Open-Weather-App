@@ -8,21 +8,21 @@ import java.util.*
 data class CityModel(
     val dateAdded: Date,
     @field:SerializedName("dt")
-    val dt: Long,
+    var dt: Long,
     @field:SerializedName("id")
     val id: Int,
     @field:SerializedName("name")
     val name: String,
     @field:SerializedName("description")
-    val description: String,
+    var description: String,
     @field:SerializedName("icon")
-    val icon: String,
+    var icon: String,
     @field:SerializedName("temp")
-    val temp: Double,
+    var temp: Double,
     @field:SerializedName("country")
     val country: String,
     @field:SerializedName("sunrise")
-    val sunrise: Int,
+    var sunrise: Int,
     @field:SerializedName("sunset")
-    val sunset: Int
+    var sunset: Int
 )

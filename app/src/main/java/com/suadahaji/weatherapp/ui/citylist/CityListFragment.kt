@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.di.Injectable
@@ -55,8 +57,13 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
         viewModel.fetchAllCities()
         viewModel.cities.observe(viewLifecycleOwner, Observer {
             val adapter = CityListAdapter(this, it)
+
+            val dividerItemDecoration = DividerItemDecoration(
+                cityListRecyclerview.context,
+                LinearLayoutManager.VERTICAL
+            )
+            cityListRecyclerview.addItemDecoration(dividerItemDecoration)
             cityListRecyclerview.adapter = adapter
-            adapter.notifyDataSetChanged()
         })
         citySearchView.setOnQueryTextListener(this)
     }
@@ -66,6 +73,11 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
     }
 
     override fun onCityClicked(city: CityModel) {
+        findNavController().navigate(
+            CityListFragmentDirections.actionCityListFragmentToCityDetailFragment(
+                city.id
+            )
+        )
         Toast.makeText(activity, city.name, Toast.LENGTH_SHORT).show()
     }
 
@@ -119,7 +131,13 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
         return false
     }
 
-    override fun onCityClicked(cityId: Int) {
-        Toast.makeText(activity, "Suada $cityId", Toast.LENGTH_SHORT).show()
+    override fun onItemClicked(cityModel: CityModel) {
+        viewModel.getCity(cityModel)
+        viewModel.addCity()
+        findNavController().navigate(
+            CityListFragmentDirections.actionCityListFragmentToCityDetailFragment(
+                cityModel.id
+            )
+        )
     }
 }

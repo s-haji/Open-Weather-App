@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.citydetail.CityDetailFragment"></androidx.constraintlayout.widget.ConstraintLayout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cityViewModel"
+            type="com.suadahaji.weatherapp.ui.citydetail.CityDetailViewModel" />
+
+        <variable
+            name="status"
+            type="com.suadahaji.weatherapp.util.Status" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.citydetail.CityDetailFragment">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkVisibility="@{cityViewModel.status.status == status.LOADING}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/city_name_format(cityViewModel.forecast.city.name, cityViewModel.forecast.city.country)}"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cityWind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/wind_format(cityViewModel.forecast.forecasts[0].wind.speed)}"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cityName" />
+
+        <TextView
+            android:id="@+id/cityHumidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/humidity_format(cityViewModel.forecast.forecasts[0].main.humidity)}"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cityWind" />
+
+        <TextView
+            android:id="@+id/cityTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/temp_format(cityViewModel.forecast.forecasts[0].main.temp)}"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cityHumidity" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
