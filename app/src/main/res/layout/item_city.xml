@@ -17,10 +17,11 @@
 
         <TextView
             android:id="@+id/cityName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
             android:text="@{@string/city_name_format(cityModel.name, cityModel.country)}"
-            android:textSize="20sp"
+            android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="San Francisco, US" />
@@ -29,31 +30,24 @@
             android:id="@+id/weatherDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@{cityModel.description}"
-            android:textSize="20sp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:capitalizeSentence="@{cityModel.description}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weatherIcon"
+            app:layout_constraintTop_toBottomOf="@id/cityName"
             tools:text="Clear Sky" />
 
         <TextView
             android:id="@+id/cityTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik"
             android:text="@{@string/temp_format(cityModel.temp)}"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@id/weatherIcon"
-            app:layout_constraintStart_toStartOf="@id/weatherIcon"
-            app:layout_constraintTop_toTopOf="@id/weatherDescription"
-            tools:text="26" />
-
-        <ImageView
-            android:id="@+id/weatherIcon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:setImage="@{cityModel.icon}" />
+            app:layout_constraintTop_toTopOf="@id/cityName"
+            tools:text="26" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

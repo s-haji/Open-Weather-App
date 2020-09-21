@@ -20,8 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{@string/city_name_format(weatherResponse.name, weatherResponse.sys.country)}"
-            android:textColor="@android:color/holo_blue_bright"
-            android:textSize="16sp"
+            android:textAppearance="?attr/textAppearanceBody2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="San Francisco, US" />
@@ -32,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@{weatherResponse.weather[0].description}"
-            android:textSize="10sp"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cityName"
             tools:text="Clear Sky" />
