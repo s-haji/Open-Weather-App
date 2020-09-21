@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.di.Injectable
@@ -55,8 +57,13 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
         viewModel.fetchAllCities()
         viewModel.cities.observe(viewLifecycleOwner, Observer {
             val adapter = CityListAdapter(this, it)
+
+            val dividerItemDecoration = DividerItemDecoration(
+                cityListRecyclerview.context,
+                LinearLayoutManager.VERTICAL
+            )
+            cityListRecyclerview.addItemDecoration(dividerItemDecoration)
             cityListRecyclerview.adapter = adapter
-            adapter.notifyDataSetChanged()
         })
         citySearchView.setOnQueryTextListener(this)
     }
