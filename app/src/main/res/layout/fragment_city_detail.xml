@@ -32,40 +32,146 @@
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@{@string/city_name_format(cityViewModel.forecast.city.name, cityViewModel.forecast.city.country)}"
+            android:textAppearance="@style/TextAppearance.Weather.Headline6"
             app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="San Francisco, US" />
 
-        <TextView
-            android:id="@+id/cityWind"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{@string/wind_format(cityViewModel.forecast.forecasts[0].wind.speed)}"
-            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/cityWeather"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cityName" />
-
-        <TextView
-            android:id="@+id/cityHumidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{@string/humidity_format(cityViewModel.forecast.forecasts[0].main.humidity)}"
-            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cityWind" />
+            app:layout_constraintTop_toBottomOf="@id/cityName"
+            app:loadImage="@{cityViewModel.forecast.forecasts[0].weather[0].icon}"
+            tools:srcCompat="@drawable/weather_02" />
 
         <TextView
             android:id="@+id/cityTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{@string/temp_format(cityViewModel.forecast.forecasts[0].main.temp)}"
+            android:textAppearance="@style/TextAppearance.Weather.Headline1"
             app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintBottom_toBottomOf="@id/cityWeather"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cityWeather"
+            app:layout_constraintTop_toTopOf="@id/cityWeather"
+            tools:text="30" />
+
+        <TextView
+            android:id="@+id/cityWind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/wind_format(cityViewModel.forecast.forecasts[0].wind.speed)}"
+            android:textAppearance="@style/TextAppearance.Weather.Headline6"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="@id/cityWeather"
+            app:layout_constraintStart_toStartOf="@id/cityWeather"
+            app:layout_constraintTop_toBottomOf="@id/cityWeather"
+            tools:text="9km/h" />
+
+        <TextView
+            android:id="@+id/cityWindLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/wind_label"
+            android:textAppearance="@style/TextAppearance.Weather.Body2"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="@id/cityWeather"
+            app:layout_constraintStart_toStartOf="@id/cityWeather"
+            app:layout_constraintTop_toBottomOf="@id/cityWind" />
+
+        <TextView
+            android:id="@+id/cityHumidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/humidity_format(cityViewModel.forecast.forecasts[0].main.humidity)}"
+            android:textAppearance="@style/TextAppearance.Weather.Headline6"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="@id/cityTemp"
+            app:layout_constraintStart_toStartOf="@id/cityTemp"
+            app:layout_constraintTop_toTopOf="@id/cityWind"
+            tools:text="100%" />
+
+        <TextView
+            android:id="@+id/cityHumidityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/humidity_label"
+            android:textAppearance="@style/TextAppearance.Weather.Body2"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="@id/cityTemp"
+            app:layout_constraintStart_toStartOf="@id/cityTemp"
             app:layout_constraintTop_toBottomOf="@id/cityHumidity" />
+
+
+        <TextView
+            android:id="@+id/cityCloud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{@string/cloud_coverage_format(cityViewModel.forecast.forecasts[0].clouds.all)}"
+            android:textAppearance="@style/TextAppearance.Weather.Headline6"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="@id/cityWeather"
+            app:layout_constraintStart_toStartOf="@id/cityWeather"
+            app:layout_constraintTop_toBottomOf="@id/cityWindLabel"
+            tools:text="100%" />
+
+        <TextView
+            android:id="@+id/cityCloudLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/cloud_label"
+            android:textAppearance="@style/TextAppearance.Weather.Body2"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="@id/cityWeather"
+            app:layout_constraintStart_toStartOf="@id/cityWeather"
+            app:layout_constraintTop_toBottomOf="@id/cityCloud" />
+
+        <TextView
+            android:id="@+id/cityRain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Weather.Headline6"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="@id/cityTemp"
+            app:layout_constraintStart_toStartOf="@id/cityTemp"
+            app:layout_constraintTop_toTopOf="@id/cityCloud"
+            app:loadRainProb="@{cityViewModel.forecast.forecasts[0].rain.rain}"
+            tools:text="100%" />
+
+        <TextView
+            android:id="@+id/cityRainLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/rain_label"
+            android:textAppearance="@style/TextAppearance.Weather.Body2"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintEnd_toEndOf="@id/cityTemp"
+            app:layout_constraintStart_toStartOf="@id/cityTemp"
+            app:layout_constraintTop_toBottomOf="@id/cityRain" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="25dp"
+            android:background="#E6E4E2"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityRainLabel" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

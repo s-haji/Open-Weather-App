@@ -12,16 +12,22 @@
 
     <!-- Wind in kph -->
     <string name="wind_format">
-        Wind Speed: <xliff:g id="speed">%1$1.0f</xliff:g> km/h
+        <xliff:g id="speed">%1$1.0f</xliff:g> km/h
     </string>
 
     <string name="humidity_format">
-       Humidity: <xliff:g id="humidity">%1.0f</xliff:g>%%
+      <xliff:g id="humidity">%1.0f</xliff:g>%%
     </string>
 
     <string name="cloud_coverage_format">
-        Cloud Coverage: <xliff:g id="cloud">%1.0f</xliff:g>%%
+        <xliff:g id="cloud">%1.0f</xliff:g>%%
     </string>
 
+
+
     <string name="city_name_format">%s, %s</string>
+    <string name="wind_label">Wind</string>
+    <string name="humidity_label">Humidity</string>
+    <string name="cloud_label">Cloud Coverage</string>
+    <string name="rain_label">Chance of Rain</string>
 </resources>
