@@ -81,7 +81,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
 
     override fun onCityLongClicked(city: CityModel): Boolean {
         val alertDialog = activity?.let {
-            val builder = AlertDialog.Builder(it)
+            val builder = AlertDialog.Builder(it,  R.style.AlertDialogStyle)
             builder.apply {
                 setMessage(R.string.delete_city)
                 setPositiveButton(
