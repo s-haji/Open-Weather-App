@@ -64,7 +64,7 @@
             android:id="@+id/weatherDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{cityViewModel.forecast.forecasts[0].weather[0].description}"
+            app:capitalizeSentence="@{cityViewModel.forecast.forecasts[0].weather[0].description}"
             android:textAppearance="@style/TextAppearance.Weather.Body1"
             app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
             app:layout_constraintEnd_toEndOf="@id/cityWeather"
@@ -78,7 +78,7 @@
             android:layout_height="200dp"
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cityTime"
+            app:layout_constraintTop_toBottomOf="@id/cityName"
             app:loadImage="@{cityViewModel.forecast.forecasts[0].weather[0].icon}"
             tools:srcCompat="@drawable/weather_02" />
 
@@ -95,18 +95,34 @@
             app:layout_constraintTop_toTopOf="@id/cityWeather"
             tools:text="30" />
 
+        <TextView
+            android:id="@+id/additionInfoForDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/next_five_days"
+            android:textAppearance="@style/TextAppearance.Weather.Headline6"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewTwo" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/forecastRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
             android:orientation="horizontal"
+            android:layout_marginTop="8dp"
             app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weatherDesc"
+            app:layout_constraintTop_toBottomOf="@id/additionInfoForDays"
             tools:itemCount="5"
             tools:listitem="@layout/item_daily_weather" />
 
@@ -227,11 +243,30 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:background="#E6E4E2"
             app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forecastRecyclerView" />
+
+        <View
+            android:id="@+id/viewTwo"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#E6E4E2"
+            app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weatherDesc" />
 
         <View
             android:id="@+id/divider"

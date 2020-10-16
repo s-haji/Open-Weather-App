@@ -17,14 +17,12 @@ fun View.checkVisibility(it: Boolean) {
     visibility = if (it) View.VISIBLE else View.GONE
 }
 
+@SuppressLint("SetTextI18n")
 @BindingAdapter("capitalizeSentence")
-fun TextView.capitalizeSentence(description: String) {
-    var retStr = description
-    try { // We can face index out of bound exception if the string is null
-        retStr = description.substring(0, 1).toUpperCase(Locale.ROOT) + description.substring(1)
-    } catch (e: Exception) {
+fun TextView.capitalizeSentence(description: String?) {
+    if (description != null) {
+        text = description.substring(0, 1).toUpperCase(Locale.ROOT) + description.substring(1)
     }
-    text = retStr
 }
 
 @BindingAdapter("loadImage")

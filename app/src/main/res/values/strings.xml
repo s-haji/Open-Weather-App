@@ -32,4 +32,5 @@
     <string name="cloud_label">Cloud Coverage</string>
     <string name="rain_label">Chance of Rain</string>
     <string name="additional_info">Additional info</string>
+    <string name="next_five_days">Next 5 days</string>
 </resources>
