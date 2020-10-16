@@ -1,12 +1,14 @@
 package com.suadahaji.weatherapp.util
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.suadahaji.weatherapp.R
+import com.suadahaji.weatherapp.data.api.ForecastResponse
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -36,33 +38,20 @@ fun loadImage(view: ImageView, weatherIcon: String?) {
 @BindingAdapter("loadRainProb")
 fun loadRainProb(view: TextView, rain: Double?) {
     val df = DecimalFormat("##.##%")
-    view.text =  df.format(rain)
+    view.text = df.format(rain)
 }
 
-@BindingAdapter("loadWeatherImage")
-fun loadWeatherImage(view: ImageView, weatherIcon: String?) {
-    weatherIcon?.let {
-        if (weatherIcon.contains("01")) {
-            view.setImageResource(R.drawable.weather_01)
-        } else if (weatherIcon.contains("02")) {
-            view.setImageResource(R.drawable.weather_02)
-        } else if (weatherIcon.contains("03")) {
-            view.setImageResource(R.drawable.weather_03)
-        } else if (weatherIcon.contains("04")) {
-            view.setImageResource(R.drawable.weather_04)
-        } else if (weatherIcon.contains("09")) {
-            view.setImageResource(R.drawable.weather_09)
-        } else if (weatherIcon.contains("10")) {
-            view.setImageResource(R.drawable.weather_10)
-        } else if (weatherIcon.contains("11")) {
-            view.setImageResource(R.drawable.weather_11)
-        } else if (weatherIcon.contains("13")) {
-            view.setImageResource(R.drawable.weather_13)
-        } else if (weatherIcon.contains("50")) {
-            view.setImageResource(R.drawable.weather_50)
-        } else {
-            view.setImageResource(R.drawable.weather_03)
-        }
-    }
+@SuppressLint("SimpleDateFormat")
+@BindingAdapter("calculateTime")
+fun calculateTime(view: TextView, forecast: ForecastResponse?) {
 
+    if (forecast != null) {
+        val sunrise = SimpleDateFormat("EEE, MMM dd h:mm a")
+        val date = Date()
+        val utc = date.time + (date.timezoneOffset * 60000)
+        val atlanta = utc + (1000 * forecast.city.timezone)
+        val newDate = Date(atlanta)
+
+        view.text = sunrise.format(newDate)
+    }
 }

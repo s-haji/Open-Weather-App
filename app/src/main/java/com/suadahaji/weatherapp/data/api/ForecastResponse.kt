@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 import com.suadahaji.weatherapp.data.models.extras.City
 import com.suadahaji.weatherapp.data.models.extras.Forecast
 
-data class ForecastResponse (
+data class ForecastResponse(
     @field:SerializedName("cod")
-    val cod : String,
+    val cod: String,
     @field:SerializedName("cnt")
-    val cnt : Int,
+    val cnt: Int,
     @field:SerializedName("list")
-    val forecasts : List<Forecast>,
+    val forecasts: List<Forecast>,
     @field:SerializedName("city")
-    val city : City
+    val city: City
 )

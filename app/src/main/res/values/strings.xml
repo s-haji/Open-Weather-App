@@ -26,8 +26,10 @@
 
 
     <string name="city_name_format">%s, %s</string>
+    <string name="temp_name_format">%s/%s</string>
     <string name="wind_label">Wind</string>
     <string name="humidity_label">Humidity</string>
     <string name="cloud_label">Cloud Coverage</string>
     <string name="rain_label">Chance of Rain</string>
+    <string name="additional_info">Additional info</string>
 </resources>
