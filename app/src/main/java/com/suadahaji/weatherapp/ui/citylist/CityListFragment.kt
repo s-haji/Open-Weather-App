@@ -149,6 +149,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
         return when (item.itemId) {
             R.id.settings -> {
                 Toast.makeText(activity, "Settings", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_CityListFragment_to_settingsFragment)
                 true
             }
             R.id.help -> {
