@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.suadahaji.weatherapp.databinding.FragmentCityDetailBinding
@@ -13,6 +14,7 @@ import com.suadahaji.weatherapp.di.Injectable
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import kotlinx.android.synthetic.main.fragment_city_detail.*
 import javax.inject.Inject
 
 class CityDetailFragment : Fragment(), Injectable, HasAndroidInjector {
@@ -28,7 +30,6 @@ class CityDetailFragment : Fragment(), Injectable, HasAndroidInjector {
 
     private val units: String?
         get() = "metric"
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +47,11 @@ class CityDetailFragment : Fragment(), Injectable, HasAndroidInjector {
         val cityId = args.cityId
         viewModel.setQuery(cityId, units)
         viewModel.fetchCityWeather()
+
+        viewModel.forecasts.observe(viewLifecycleOwner, Observer {
+            val adapter = CityForecastAdapter(it.drop(1))
+            forecastRecyclerView.adapter = adapter
+        })
     }
 
     override fun androidInjector(): AndroidInjector<Any> {

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cityForecast"
+            type="com.suadahaji.weatherapp.data.models.extras.Forecast" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/item_bg"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{cityForecast.dt_txt}"
+            android:textAppearance="@style/TextAppearance.Weather.Body1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Tomorrow" />
+
+        <TextView
+            android:id="@+id/maxTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/temp_name_format(@string/temp_format(cityForecast.main.temp_max), @string/temp_format(cityForecast.main.temp_max))}"
+            android:textAppearance="@style/TextAppearance.Weather.Body1"
+            app:layout_constraintEnd_toEndOf="@id/cityWeather"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/cityWeather"
+            app:layout_constraintTop_toBottomOf="@id/cityWeather"
+            tools:text="57" />
+
+        <ImageView
+            android:id="@+id/cityWeather"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date"
+            app:loadImage="@{cityForecast.weather[0].icon}"
+            tools:srcCompat="@drawable/weather_02" />
+
+        <TextView
+            android:id="@+id/weatherDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:capitalizeSentence="@{cityForecast.weather[0].description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/maxTemp"
+            tools:text="Mostly Sunny" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

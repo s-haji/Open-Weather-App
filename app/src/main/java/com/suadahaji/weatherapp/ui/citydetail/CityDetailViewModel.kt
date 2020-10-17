@@ -1,17 +1,20 @@
 package com.suadahaji.weatherapp.ui.citydetail
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.suadahaji.weatherapp.data.api.ForecastResponse
 import com.suadahaji.weatherapp.data.models.CityModel
+import com.suadahaji.weatherapp.data.models.extras.Forecast
 import com.suadahaji.weatherapp.data.repository.MainRepository
 import com.suadahaji.weatherapp.util.NetworkState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 class CityDetailViewModel @Inject constructor(private val mainRepository: MainRepository) :
@@ -23,6 +26,10 @@ class CityDetailViewModel @Inject constructor(private val mainRepository: MainRe
     private var _forecast = MutableLiveData<ForecastResponse>()
     val forecast: LiveData<ForecastResponse>
         get() = _forecast
+
+    private var _forecasts = MutableLiveData<List<Forecast>>()
+    val forecasts: LiveData<List<Forecast>>
+        get() = _forecasts
 
     private var _city = MutableLiveData<CityModel>()
     val city: LiveData<CityModel>
@@ -38,6 +45,7 @@ class CityDetailViewModel @Inject constructor(private val mainRepository: MainRe
     }
 
 
+    @SuppressLint("SimpleDateFormat")
     fun fetchCityWeather() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
         try {
             _status.value = NetworkState.LOADING
@@ -61,6 +69,14 @@ class CityDetailViewModel @Inject constructor(private val mainRepository: MainRe
 
                     mainRepository.update(cityModel)
                     _city.value = cityModel
+
+                    for (forecast in it.forecasts) {
+                        val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(forecast.dt_txt)
+                        val sunrise = SimpleDateFormat("EEEE")
+                        forecast.dt_txt = sunrise.format(date)
+                    }
+                    _forecasts.value = it.forecasts.distinctBy { it.dt_txt }
+
                 }
             }
         } catch (e: Exception) {

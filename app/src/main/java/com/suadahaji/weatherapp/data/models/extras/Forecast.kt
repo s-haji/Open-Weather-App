@@ -9,7 +9,7 @@ data class Forecast(
     @field:SerializedName("dt")
     val dt: Long,
     @field:SerializedName("dt_txt")
-    val dt_txt: String,
+    var dt_txt: String,
     @field:SerializedName("main")
     val main: Main,
     @field:SerializedName("rain")

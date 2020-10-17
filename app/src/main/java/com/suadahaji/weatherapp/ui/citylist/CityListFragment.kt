@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -78,12 +77,11 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
                 city.id
             )
         )
-        Toast.makeText(activity, city.name, Toast.LENGTH_SHORT).show()
     }
 
     override fun onCityLongClicked(city: CityModel): Boolean {
         val alertDialog = activity?.let {
-            val builder = AlertDialog.Builder(it)
+            val builder = AlertDialog.Builder(it,  R.style.AlertDialogStyle)
             builder.apply {
                 setMessage(R.string.delete_city)
                 setPositiveButton(

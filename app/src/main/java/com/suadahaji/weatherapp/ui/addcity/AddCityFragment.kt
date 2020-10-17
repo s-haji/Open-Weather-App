@@ -73,7 +73,6 @@ class AddCityFragment : Fragment(), Injectable, HasAndroidInjector, OnMapReadyCa
 
         viewModel.weather.observe(viewLifecycleOwner, Observer {
             if (it.name.isNotEmpty()) {
-                Toast.makeText(activity, it.name, Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
             } else {
                 Toast.makeText(activity, "Select a city", Toast.LENGTH_SHORT).show()
