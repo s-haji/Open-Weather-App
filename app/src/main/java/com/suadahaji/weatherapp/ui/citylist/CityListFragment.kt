@@ -1,9 +1,7 @@
 package com.suadahaji.weatherapp.ui.citylist
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -43,6 +41,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_city_list, container, false)
+        setHasOptionsMenu(true)
         return view
     }
 
@@ -82,7 +81,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
 
     override fun onCityLongClicked(city: CityModel): Boolean {
         val alertDialog = activity?.let {
-            val builder = AlertDialog.Builder(it,  R.style.AlertDialogStyle)
+            val builder = AlertDialog.Builder(it, R.style.AlertDialogStyle)
             builder.apply {
                 setMessage(R.string.delete_city)
                 setPositiveButton(
@@ -139,5 +138,24 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
                 cityModel.id
             )
         )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.settings -> {
+                Toast.makeText(activity, "Settings", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.help -> {
+                Toast.makeText(activity, "Help", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
