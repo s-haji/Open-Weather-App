@@ -19,6 +19,7 @@
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik"
             android:text="@{@string/city_name_format(weatherResponse.name, weatherResponse.sys.country)}"
             android:textAppearance="?attr/textAppearanceBody2"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,11 +31,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/rubik"
             android:text="@{weatherResponse.weather[0].description}"
             android:textAppearance="?attr/textAppearanceSubtitle2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cityName"
             tools:text="Clear Sky" />
+
+        <TextView
+            android:id="@+id/cityTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik"
+            android:text="@{@string/temp_format(weatherResponse.main.temp)}"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintBottom_toBottomOf="@id/weatherDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cityName"
+            tools:text="26" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
