@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.preference.PreferenceManager
 import com.suadahaji.weatherapp.databinding.FragmentCityDetailBinding
 import com.suadahaji.weatherapp.di.Injectable
+import com.suadahaji.weatherapp.util.UNITS
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -28,9 +30,6 @@ class CityDetailFragment : Fragment(), Injectable, HasAndroidInjector {
 
     private val args: CityDetailFragmentArgs by navArgs()
 
-    private val units: String?
-        get() = "metric"
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +44,8 @@ class CityDetailFragment : Fragment(), Injectable, HasAndroidInjector {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val cityId = args.cityId
+        val preference = PreferenceManager.getDefaultSharedPreferences(context)
+        val units = preference.getString(UNITS, "metric")
         viewModel.setQuery(cityId, units)
         viewModel.fetchCityWeather()
 
@@ -57,5 +58,4 @@ class CityDetailFragment : Fragment(), Injectable, HasAndroidInjector {
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
     }
-
 }

@@ -10,11 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.di.Injectable
+import com.suadahaji.weatherapp.util.UNITS
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -30,9 +32,6 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private val units: String?
-        get() = "metric"
 
     private val viewModel: CityListViewModel by viewModels { viewModelFactory }
 
@@ -105,6 +104,8 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
 
     override fun onQueryTextSubmit(p0: String): Boolean {
         if (p0.isNotEmpty()) {
+            val preference = PreferenceManager.getDefaultSharedPreferences(context)
+            val units = preference.getString(UNITS, "metric")
             viewModel.setQuery(p0, units)
             viewModel.searchCities()
             viewModel.searchCities.observe(viewLifecycleOwner, Observer {
