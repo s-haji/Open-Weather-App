@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import androidx.preference.PreferenceManager
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
         navController = Navigation.findNavController(this, R.id.nav_host)
         NavigationUI.setupActionBarWithNavController(this, navController)
+
+        PreferenceManager.setDefaultValues(this,R.xml.root_preferences, false)
     }
 
     override fun onSupportNavigateUp(): Boolean {

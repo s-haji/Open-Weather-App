@@ -11,7 +11,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:defaultValue="metric"
+            app:defaultValue="@string/unit_default"
             app:entries="@array/unit_entries"
             app:entryValues="@array/unit_values"
             app:key="units"

@@ -105,7 +105,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
     override fun onQueryTextSubmit(p0: String): Boolean {
         if (p0.isNotEmpty()) {
             val preference = PreferenceManager.getDefaultSharedPreferences(context)
-            val units = preference.getString(UNITS, "metric")
+            val units = preference.getString(UNITS,  getString(R.string.unit_default))
             viewModel.setQuery(p0, units)
             viewModel.searchCities()
             viewModel.searchCities.observe(viewLifecycleOwner, Observer {

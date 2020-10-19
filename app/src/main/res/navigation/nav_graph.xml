@@ -37,7 +37,12 @@
         android:id="@+id/AddCityFragment"
         android:name="com.suadahaji.weatherapp.ui.addcity.AddCityFragment"
         tools:layout="@layout/fragment_add_city"
-        android:label="@string/add_city_label" />
+        android:label="@string/add_city_label" >
+        <action
+            android:id="@+id/action_AddCityFragment_to_CityDetailFragment"
+            app:destination="@id/CityDetailFragment"
+            app:popUpTo="@id/CityListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.suadahaji.weatherapp.ui.settings.SettingsFragment"

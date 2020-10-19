@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.preference.PreferenceManager
+import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.databinding.FragmentCityDetailBinding
 import com.suadahaji.weatherapp.di.Injectable
 import com.suadahaji.weatherapp.util.UNITS
@@ -45,7 +46,7 @@ class CityDetailFragment : Fragment(), Injectable, HasAndroidInjector {
         super.onViewCreated(view, savedInstanceState)
         val cityId = args.cityId
         val preference = PreferenceManager.getDefaultSharedPreferences(context)
-        val units = preference.getString(UNITS, "metric")
+        val units = preference.getString(UNITS, getString(R.string.unit_default))
         viewModel.setQuery(cityId, units)
         viewModel.fetchCityWeather()
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.di.Injectable
+import com.suadahaji.weatherapp.util.UNITS
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -33,9 +35,6 @@ class AddCityFragment : Fragment(), Injectable, HasAndroidInjector, OnMapReadyCa
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: AddCityViewModel by viewModels { viewModelFactory }
-
-    private val units: String?
-        get() = "metric"
 
     private lateinit var map: GoogleMap
 
@@ -68,12 +67,19 @@ class AddCityFragment : Fragment(), Injectable, HasAndroidInjector, OnMapReadyCa
     override fun onMapClick(latLng: LatLng) {
         map.addMarker(MarkerOptions().position(latLng))
 
+        val preference = PreferenceManager.getDefaultSharedPreferences(context)
+        val units = preference.getString(UNITS, getString(R.string.unit_default))
+
         viewModel.setQuery(latLng.latitude.toString(), latLng.longitude.toString(), units)
         viewModel.fetchCityWeather()
 
         viewModel.weather.observe(viewLifecycleOwner, Observer {
             if (it.name.isNotEmpty()) {
-                findNavController().popBackStack()
+                findNavController().navigate(
+                    AddCityFragmentDirections.actionAddCityFragmentToCityDetailFragment(
+                        it.id
+                    )
+                )
             } else {
                 Toast.makeText(activity, "Select a city", Toast.LENGTH_SHORT).show()
             }
