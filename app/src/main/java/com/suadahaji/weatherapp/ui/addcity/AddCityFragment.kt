@@ -1,6 +1,7 @@
 package com.suadahaji.weatherapp.ui.addcity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.di.Injectable
+import com.suadahaji.weatherapp.util.TAG
 import com.suadahaji.weatherapp.util.UNITS
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -80,6 +82,7 @@ class AddCityFragment : Fragment(), Injectable, HasAndroidInjector, OnMapReadyCa
                         it.id
                     )
                 )
+                Log.d(TAG, "onMapClick: $it")
             } else {
                 Toast.makeText(activity, "Select a city", Toast.LENGTH_SHORT).show()
             }
