@@ -41,10 +41,15 @@
 
         <TextView
             android:id="@+id/emptySearch"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:elevation="5dp"
+            android:fontFamily="@font/rubik"
             android:text="City not found"
+            android:textAppearance="?attr/textAppearanceBody2"
             android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/searchRecyclerView"
             app:layout_constraintTop_toBottomOf="@id/citySearchView" />
 
         <androidx.recyclerview.widget.RecyclerView
