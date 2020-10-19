@@ -6,22 +6,22 @@
             app:entries="@array/theme_entries"
             app:entryValues="@array/theme_values"
             app:key="theme"
+            app:icon="@drawable/ic_theme"
             app:title="@string/theme_title"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:defaultValue="metric"
+            app:defaultValue="@string/unit_default"
             app:entries="@array/unit_entries"
             app:entryValues="@array/unit_values"
             app:key="units"
             app:title="@string/unit_title"
             app:useSimpleSummaryProvider="true" />
 
-        <EditTextPreference
-            app:defaultValue="Delete all bookmarked cities"
+        <Preference
             app:key="reset_data"
-            app:title="@string/reset_data_title"
-            app:useSimpleSummaryProvider="true" />
+            app:summary="Delete all bookmarked cities"
+            app:title="@string/reset_data_title" />
 
 
     </PreferenceCategory>

@@ -43,4 +43,5 @@
     <string name="reset_data_title">Reset Data</string>
     <string name="theme_title">Theme</string>
     <string name="unit_title">Temperature Units</string>
+    <string name="unit_default">metric</string>
 </resources>

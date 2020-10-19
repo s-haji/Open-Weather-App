@@ -1,7 +1,8 @@
-package com.suadahaji.weatherapp
+package com.suadahaji.weatherapp.ui.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import com.suadahaji.weatherapp.R
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
