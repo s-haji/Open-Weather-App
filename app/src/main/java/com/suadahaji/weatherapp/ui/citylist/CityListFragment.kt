@@ -1,6 +1,5 @@
 package com.suadahaji.weatherapp.ui.citylist
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.di.Injectable
-import com.suadahaji.weatherapp.ui.settings.SettingsActivity
 import com.suadahaji.weatherapp.util.UNITS
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -151,7 +149,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.settings -> {
-                startActivity(Intent(activity, SettingsActivity::class.java))
+                findNavController().navigate(R.id.action_CityListFragment_to_settingsFragment)
                 true
             }
             R.id.help -> {

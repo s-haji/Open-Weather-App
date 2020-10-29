@@ -43,4 +43,8 @@
             app:destination="@id/CityDetailFragment"
             app:popUpTo="@id/CityListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.suadahaji.weatherapp.ui.settings.SettingsFragment"
+        android:label="@string/settings" />
 </navigation>
