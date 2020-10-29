@@ -2,11 +2,11 @@
 
     <PreferenceCategory>
         <ListPreference
-            app:defaultValue="light"
+            app:defaultValue="@string/theme_default"
             app:entries="@array/theme_entries"
             app:entryValues="@array/theme_values"
-            app:key="theme"
             app:icon="@drawable/ic_theme"
+            app:key="theme"
             app:title="@string/theme_title"
             app:useSimpleSummaryProvider="true" />
 

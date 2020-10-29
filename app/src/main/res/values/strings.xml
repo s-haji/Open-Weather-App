@@ -44,4 +44,5 @@
     <string name="theme_title">Theme</string>
     <string name="unit_title">Temperature Units</string>
     <string name="unit_default">metric</string>
+    <string name="theme_default">light</string>
 </resources>
