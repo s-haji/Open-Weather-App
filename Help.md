@@ -1,10 +1,8 @@
-[![](https://github.com/suada-haji/Open-Weather-App/blob/master/screenshots/weather_app.png)](https://github.com/suada-haji/Open-Weather-App) 
+# Help Center
 
 
-Help Center
-===============
+### Searching for a City
 
-## Searching for a City
 #### How do I search for a city?
 There are two ways to search for a city: 
 1. Use the Search Bar
@@ -19,7 +17,7 @@ There are two ways to search for a city:
 <img src="https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/SearchFab.png" width="150"/>
 
 
-## Changing Theme
+### Changing Theme
 #### How do I turn on Dark Mode?
 You can turn it on from the app by:
 1. On your Home Screen tap ![](https://img.icons8.com/material-outlined/12/000000/menu-2.png) in the top right and select Settings
