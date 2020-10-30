@@ -1,4 +1,5 @@
-## Welcome to GitHub Pages
+[![](https://github.com/suada-haji/Open-Weather-App/blob/master/screenshots/weather_app.png)](https://github.com/suada-haji/Open-Weather-App) 
+
 
 You can use the [editor on GitHub](https://github.com/suada-haji/Open-Weather-App/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
