@@ -153,7 +153,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
                 true
             }
             R.id.help -> {
-                Toast.makeText(activity, "Help", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_CityListFragment_to_helpFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)
