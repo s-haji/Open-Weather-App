@@ -32,6 +32,10 @@ class MainRepository @Inject constructor(
         weatherDao.deleteCity(city)
     }
 
+    suspend fun deleteAllCities(cities: List<CityModel>) {
+        weatherDao.deleteAllCities(cities)
+    }
+
     suspend fun getCity(cityId: Int): CityModel = weatherDao.getCity(cityId)
 
 

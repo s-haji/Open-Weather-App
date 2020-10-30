@@ -56,10 +56,8 @@ class AddCityFragment : Fragment(), Injectable, HasAndroidInjector, OnMapReadyCa
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         val cameraPosition = CameraPosition.Builder().target(
-            sydney
+            LatLng(18.23, 39.47)
         ).zoom(2f).build()
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         map.setOnMapClickListener(this)
