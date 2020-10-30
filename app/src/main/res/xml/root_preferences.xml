@@ -2,7 +2,7 @@
 
     <PreferenceCategory>
         <ListPreference
-            app:defaultValue="@string/theme_default"
+            app:defaultValue="-1"
             app:entries="@array/theme_entries"
             app:entryValues="@array/theme_values"
             app:icon="@drawable/ic_theme"
@@ -14,11 +14,13 @@
             app:defaultValue="@string/unit_default"
             app:entries="@array/unit_entries"
             app:entryValues="@array/unit_values"
+            app:icon="@drawable/ic_temp_units"
             app:key="units"
             app:title="@string/unit_title"
             app:useSimpleSummaryProvider="true" />
 
         <Preference
+            app:icon="@drawable/ic_delete"
             app:key="reset_data"
             app:summary="Delete all bookmarked cities"
             app:title="@string/reset_data_title" />
@@ -26,8 +28,40 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/support_header">
+    <PreferenceCategory>
+        <Preference
+            app:icon="@drawable/ic_help"
+            app:key="help"
+            app:title="@string/help" />
 
+        <Preference
+            app:icon="@drawable/ic_share"
+            app:key="share"
+            app:title="@string/share" />
+
+        <Preference
+            app:icon="@drawable/ic_privacy"
+            app:key="Privacy"
+            app:title="@string/privacy" />
+
+        <Preference
+            app:icon="@drawable/ic_contact"
+            app:key="contact_us"
+            app:title="@string/contact_us" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory>
+
+        <Preference
+            app:icon="@drawable/ic_open_source"
+            app:key="open_source"
+            app:title="@string/open_source" />
+
+        <Preference
+            app:icon="@drawable/ic_about"
+            app:key="about"
+            app:title="@string/about" />
 
     </PreferenceCategory>
 
