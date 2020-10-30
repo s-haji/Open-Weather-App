@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -75,6 +76,12 @@ class SettingsFragment : PreferenceFragmentCompat(), Injectable, HasAndroidInjec
                 builder.create()
             }
             alertDialog?.show()
+            true
+        }
+
+        val helpPreference = findPreference<Preference>("help")
+        helpPreference!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_helpFragment)
             true
         }
     }

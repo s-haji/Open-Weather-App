@@ -4,6 +4,7 @@ import com.suadahaji.weatherapp.ui.addcity.AddCityFragment
 import com.suadahaji.weatherapp.ui.citydetail.CityDetailFragment
 import com.suadahaji.weatherapp.ui.citylist.CityListFragment
 import com.suadahaji.weatherapp.ui.settings.SettingsFragment
+import com.suadahaji.weatherapp.ui.settings.help.HelpFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -20,4 +21,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun bindSettingsFragment(): SettingsFragment
+
+    @ContributesAndroidInjector
+    abstract fun bindHelpFragment(): HelpFragment
 }

@@ -13,13 +13,32 @@
 
         <action
             android:id="@+id/action_CityListFragment_to_CityDetailFragment"
-            app:destination="@id/CityDetailFragment" />
+            app:destination="@id/CityDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_CityListFragment_to_AddCityFragment"
-            app:destination="@id/AddCityFragment" />
+            app:destination="@id/AddCityFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_CityListFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_CityListFragment_to_helpFragment"
+            app:destination="@id/helpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/CityDetailFragment"
@@ -27,24 +46,44 @@
         tools:layout="@layout/fragment_city_detail">
         <action
             android:id="@+id/action_CityDetailFragment_to_CityListFragment"
-            app:destination="@id/CityListFragment" />
+            app:destination="@id/CityListFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <argument
             android:name="cityId"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/AddCityFragment"
         android:name="com.suadahaji.weatherapp.ui.addcity.AddCityFragment"
-        tools:layout="@layout/fragment_add_city"
-        android:label="@string/add_city_label" >
+        android:label="@string/add_city_label"
+        tools:layout="@layout/fragment_add_city">
         <action
             android:id="@+id/action_AddCityFragment_to_CityDetailFragment"
             app:destination="@id/CityDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/CityListFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.suadahaji.weatherapp.ui.settings.SettingsFragment"
-        android:label="@string/settings" />
+        android:label="@string/settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_helpFragment"
+            app:destination="@id/helpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.suadahaji.weatherapp.ui.settings.help.HelpFragment"
+        android:label="Help" />
 </navigation>
