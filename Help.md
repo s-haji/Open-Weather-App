@@ -12,11 +12,11 @@ There are two ways to search for a city:
       - Tap Search for a city then tap ![](https://img.icons8.com/material-outlined/12/000000/search.png) on the keyboard to get your results.
 
 
-<img src="https://github.com/suada-haji/Open-Weather-App/blob/ft-help/screenshots/SearchToolbar.png" width="150"/> 
+<img src="https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/SearchToolbar.png" width="150"/> 
 
 2. Click on the Fab Icon
     - You can also click on the icon at the bottom of the Home Screen which will take you to a map and you can click on any city on the map.
-<img src="https://github.com/suada-haji/Open-Weather-App/blob/ft-help/screenshots/SearchFab.png" width="150"/>
+<img src="https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/SearchFab.png" width="150"/>
 
 
 ## Changing Theme
