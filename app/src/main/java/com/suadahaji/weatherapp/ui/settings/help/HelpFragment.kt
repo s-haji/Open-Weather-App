@@ -37,7 +37,7 @@ class HelpFragment : Fragment(), Injectable, HasAndroidInjector {
 
         activity?.runOnUiThread {
             webView.settings.javaScriptEnabled = true
-            webView.settings.domStorageEnabled = true // Add this
+            webView.settings.domStorageEnabled = true
             webView.settings.builtInZoomControls = true
 
             webView.settings.javaScriptCanOpenWindowsAutomatically = true
