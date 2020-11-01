@@ -1,4 +1,4 @@
-package com.suadahaji.weatherapp.ui.settings.help
+package com.suadahaji.weatherapp.ui.settings
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -9,16 +9,19 @@ import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.di.Injectable
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import kotlinx.android.synthetic.main.fragment_help.*
+import kotlinx.android.synthetic.main.fragment_webview.*
 import javax.inject.Inject
 
 
-class HelpFragment : Fragment(), Injectable, HasAndroidInjector {
+class WebViewFragment : Fragment(), Injectable, HasAndroidInjector {
+
+    private val args: WebViewFragmentArgs by navArgs()
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -27,7 +30,7 @@ class HelpFragment : Fragment(), Injectable, HasAndroidInjector {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_help, container, false)
+        val view = inflater.inflate(R.layout.fragment_webview, container, false)
         setHasOptionsMenu(true)
         return view
     }
@@ -35,8 +38,6 @@ class HelpFragment : Fragment(), Injectable, HasAndroidInjector {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val url = getString(R.string.web_url)
-
         activity?.runOnUiThread {
             webView.settings.javaScriptEnabled = true
             webView.settings.domStorageEnabled = true
@@ -47,11 +48,23 @@ class HelpFragment : Fragment(), Injectable, HasAndroidInjector {
                 webView.settings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE;
             }
             webView.webViewClient = object : WebViewClient() {}
-            webView.loadUrl(url)
+            webView.loadUrl(getUrl())
         }
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
+    }
+
+    private fun getUrl(): String {
+        return when (args.title) {
+            getString(R.string.preference_key_privacy) -> getString(R.string.help_web_url)
+
+            getString(R.string.preference_key_open_source) -> getString(R.string.help_web_url)
+
+            getString(R.string.preference_key_about) -> getString(R.string.help_web_url)
+
+            else -> getString(R.string.help_web_url)
+        }
     }
 }

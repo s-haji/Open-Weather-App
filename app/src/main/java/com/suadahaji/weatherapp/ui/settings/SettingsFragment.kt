@@ -79,14 +79,22 @@ class SettingsFragment : PreferenceFragmentCompat(), Injectable, HasAndroidInjec
             true
         }
 
-        val helpPreference = findPreference<Preference>("help")
-        helpPreference!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_helpFragment)
-            true
-        }
+        getWebView(getString(R.string.preference_key_help), getString(R.string.help))
+        getWebView(getString(R.string.preference_key_privacy),getString(R.string.privacy))
+        getWebView(getString(R.string.preference_key_open_source),getString(R.string.open_source))
+        getWebView(getString(R.string.preference_key_about),getString(R.string.about))
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
+    }
+
+    private fun getWebView(key: String, title: String) {
+        findPreference<Preference>(key)!!.onPreferenceClickListener =
+            Preference.OnPreferenceClickListener {
+                val action = SettingsFragmentDirections.actionSettingsFragmentToWebViewFragment(key, title)
+                findNavController().navigate(action)
+                true
+            }
     }
 }

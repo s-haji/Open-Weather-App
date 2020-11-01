@@ -105,7 +105,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
     override fun onQueryTextSubmit(p0: String): Boolean {
         if (p0.isNotEmpty()) {
             val preference = PreferenceManager.getDefaultSharedPreferences(context)
-            val units = preference.getString(UNITS,  getString(R.string.unit_default))
+            val units = preference.getString(UNITS, getString(R.string.unit_default))
             viewModel.setQuery(p0, units)
             viewModel.searchCities()
             viewModel.searchCities.observe(viewLifecycleOwner, Observer {
@@ -154,7 +154,11 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
                 true
             }
             R.id.help -> {
-                findNavController().navigate(R.id.action_CityListFragment_to_helpFragment)
+                val action = CityListFragmentDirections.actionCityListFragmentToWebViewFragment(
+                    getString(R.string.preference_key_help),
+                    getString(R.string.help)
+                )
+                findNavController().navigate(action)
                 true
             }
             else -> super.onOptionsItemSelected(item)
