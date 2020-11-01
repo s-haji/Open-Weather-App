@@ -1,10 +1,12 @@
 package com.suadahaji.weatherapp.ui.settings.help
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebSettings
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.suadahaji.weatherapp.R
@@ -41,6 +43,9 @@ class HelpFragment : Fragment(), Injectable, HasAndroidInjector {
             webView.settings.builtInZoomControls = true
 
             webView.settings.javaScriptCanOpenWindowsAutomatically = true
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                webView.settings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE;
+            }
             webView.webViewClient = object : WebViewClient() {}
             webView.loadUrl(url)
         }
