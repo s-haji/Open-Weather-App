@@ -11,8 +11,16 @@ import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.security.SecureRandom
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
+
 
 @Module
 object NetworkModule {
@@ -22,7 +30,7 @@ object NetworkModule {
     fun provideOkHttpClient(
         context: Context
     ): OkHttpClient {
-        return OkHttpClient.Builder()
+        val client = OkHttpClient.Builder()
             .followRedirects(true)
             .followSslRedirects(true)
             .retryOnConnectionFailure(true)
@@ -55,7 +63,8 @@ object NetworkModule {
             }
             .readTimeout(100, TimeUnit.SECONDS)
             .connectTimeout(100, TimeUnit.SECONDS)
-            .build()
+
+        return enableTls12OnPreLollipop(client).build()
     }
 
     @JvmStatic
@@ -70,5 +79,47 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build().create(WeatherApiService::class.java)
+    }
+
+    fun enableTls12OnPreLollipop(client: OkHttpClient.Builder): OkHttpClient.Builder {
+
+
+        return try {
+            // Creating a trust manager that does not validate certificate chains
+            val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(
+                object : X509TrustManager {
+                    @Throws(CertificateException::class)
+                    override fun checkClientTrusted(
+                        chain: Array<X509Certificate>,
+                        authType: String
+                    ) {
+                    }
+
+                    @Throws(CertificateException::class)
+                    override fun checkServerTrusted(
+                        chain: Array<X509Certificate>,
+                        authType: String
+                    ) {
+                    }
+
+                    override fun getAcceptedIssuers(): Array<X509Certificate> {
+                        return arrayOf()
+                    }
+                }
+            )
+
+            // Installing the all-trusting trust manager
+            val sslContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, trustAllCerts, SecureRandom())
+
+            // Creating an ssl socket factory with our all-trusting manager
+            val sslSocketFactory: SSLSocketFactory = sslContext.socketFactory
+            val builder = OkHttpClient.Builder()
+            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+            builder.hostnameVerifier { _, _ -> true }
+            builder
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
     }
 }

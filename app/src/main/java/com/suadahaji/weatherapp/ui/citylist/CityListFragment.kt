@@ -47,7 +47,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        fab.bringToFront()
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_CityListFragment_to_AddCityFragment)
         }
@@ -113,6 +113,7 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
                 if (it.isNotEmpty()) {
                     emptySearch.visibility = View.GONE
                     searchRecyclerView.visibility = View.VISIBLE
+                    searchRecyclerView.bringToFront()
                 } else {
                     emptySearch.visibility = View.VISIBLE
                     searchRecyclerView.visibility = View.GONE
