@@ -1,5 +1,6 @@
 package com.suadahaji.weatherapp.ui.settings.help
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,14 +30,20 @@ class HelpFragment : Fragment(), Injectable, HasAndroidInjector {
         return view
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val url = getString(R.string.web_url)
 
-        webView.webViewClient = WebViewClient()
-        webView.settings.javaScriptEnabled = true
-        webView.settings.builtInZoomControls = true
-        webView.loadUrl(url)
+        activity?.runOnUiThread {
+            webView.settings.javaScriptEnabled = true
+            webView.settings.domStorageEnabled = true // Add this
+            webView.settings.builtInZoomControls = true
+
+            webView.settings.javaScriptCanOpenWindowsAutomatically = true
+            webView.webViewClient = object : WebViewClient() {}
+            webView.loadUrl(url)
+        }
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
