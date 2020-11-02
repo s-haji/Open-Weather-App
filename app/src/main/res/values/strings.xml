@@ -60,4 +60,6 @@
     <string name="preference_key_reset_data">reset_data</string>
     <string name="preference_key_units">units</string>
     <string name="preference_key_theme">theme</string>
+    <string name="search">Search</string>
+    <string name="content_description_search">Description For Search</string>
 </resources>

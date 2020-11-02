@@ -1,10 +1,12 @@
 package com.suadahaji.weatherapp.ui.citylist
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -14,6 +16,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suadahaji.weatherapp.R
+import com.suadahaji.weatherapp.data.api.WeatherResponse
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.di.Injectable
 import com.suadahaji.weatherapp.util.UNITS
@@ -24,8 +27,12 @@ import kotlinx.android.synthetic.main.fragment_city_list.*
 import javax.inject.Inject
 
 class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
-    CityListAdapter.ItemClickListener, SearchView.OnQueryTextListener,
+    CityListAdapter.ItemClickListener,
     CitySearchAdapter.ItemClickListener {
+
+    private fun setAdapter(cities: List<WeatherResponse>) {
+        searchRecyclerView.adapter = CitySearchAdapter(this, cities)
+    }
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -63,7 +70,6 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
             cityListRecyclerview.addItemDecoration(dividerItemDecoration)
             cityListRecyclerview.adapter = adapter
         })
-        citySearchView.setOnQueryTextListener(this)
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
@@ -102,36 +108,6 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
         return true
     }
 
-    override fun onQueryTextSubmit(p0: String): Boolean {
-        if (p0.isNotEmpty()) {
-            val preference = PreferenceManager.getDefaultSharedPreferences(context)
-            val units = preference.getString(UNITS, getString(R.string.unit_default))
-            viewModel.setQuery(p0, units)
-            viewModel.searchCities()
-            viewModel.searchCities.observe(viewLifecycleOwner, Observer {
-                searchRecyclerView.adapter = CitySearchAdapter(this, it)
-                if (it.isNotEmpty()) {
-                    emptySearch.visibility = View.GONE
-                    searchRecyclerView.visibility = View.VISIBLE
-                    searchRecyclerView.bringToFront()
-                } else {
-                    emptySearch.visibility = View.VISIBLE
-                    searchRecyclerView.visibility = View.GONE
-                }
-            })
-        }
-        return false
-    }
-
-    override fun onQueryTextChange(p0: String): Boolean {
-        if (p0.isEmpty()) {
-            searchRecyclerView.adapter = CitySearchAdapter(this, emptyList())
-            emptySearch.visibility = View.GONE
-            searchRecyclerView.visibility = View.GONE
-        }
-        return false
-    }
-
     override fun onItemClicked(cityModel: CityModel) {
         viewModel.getCity(cityModel)
         viewModel.addCity()
@@ -140,11 +116,54 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
                 cityModel.id
             )
         )
+        setAdapter(emptyList())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.main_menu, menu)
+
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu.findItem(R.id.search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+        }
+
+        (menu.findItem(R.id.search).actionView as SearchView)
+            .setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    newText?.let {
+                        if (newText.isEmpty()) {
+                            setAdapter(emptyList())
+                            emptySearch.visibility = View.GONE
+                            searchRecyclerView.visibility = View.GONE
+                        }
+                    }
+                    return false
+                }
+
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    query?.let {
+                        if (query.isNotEmpty()) {
+                            val preference = PreferenceManager.getDefaultSharedPreferences(context)
+                            val units =
+                                preference.getString(UNITS, getString(R.string.unit_default))
+                            viewModel.setQuery(query, units)
+                            viewModel.searchCities()
+                            viewModel.searchCities.observe(viewLifecycleOwner, Observer {
+                                setAdapter(it)
+                                if (it.isNotEmpty()) {
+                                    emptySearch.visibility = View.GONE
+                                    searchRecyclerView.visibility = View.VISIBLE
+                                    searchRecyclerView.bringToFront()
+                                } else {
+                                    emptySearch.visibility = View.VISIBLE
+                                    searchRecyclerView.visibility = View.GONE
+                                }
+                            })
+                        }
+                    }
+                    return false
+                }
+            })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
