@@ -1,5 +1,7 @@
 package com.suadahaji.weatherapp.ui.settings
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -82,6 +84,23 @@ class SettingsFragment : PreferenceFragmentCompat(), Injectable, HasAndroidInjec
 
         findPreference<Preference>(getString(R.string.preference_key_version))!!.title =
             getString(R.string.version__format, BuildConfig.VERSION_NAME)
+
+        findPreference<Preference>(getString(R.string.preference_key_contact_us))!!.onPreferenceClickListener =
+            Preference.OnPreferenceClickListener {
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:")
+                    putExtra(
+                        Intent.EXTRA_EMAIL, listOf(
+                            getString(R.string.preference_email)
+                        ).toTypedArray()
+                    )
+                    putExtra(Intent.EXTRA_SUBJECT, "Report a Problem")
+                }
+                if (activity?.packageManager?.let { it1 -> intent.resolveActivity(it1) } != null) {
+                    startActivity(intent)
+                }
+                true
+            }
 
         getWebView(getString(R.string.preference_key_help), getString(R.string.help))
         getWebView(getString(R.string.preference_key_privacy), getString(R.string.privacy))
