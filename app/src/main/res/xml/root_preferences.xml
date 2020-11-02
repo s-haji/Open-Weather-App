@@ -6,7 +6,7 @@
             app:entries="@array/theme_entries"
             app:entryValues="@array/theme_values"
             app:icon="@drawable/ic_theme"
-            app:key="theme"
+            app:key="@string/preference_key_theme"
             app:title="@string/theme_title"
             app:useSimpleSummaryProvider="true" />
 
@@ -15,13 +15,13 @@
             app:entries="@array/unit_entries"
             app:entryValues="@array/unit_values"
             app:icon="@drawable/ic_temp_units"
-            app:key="units"
+            app:key="@string/preference_key_units"
             app:title="@string/unit_title"
             app:useSimpleSummaryProvider="true" />
 
         <Preference
             app:icon="@drawable/ic_delete"
-            app:key="reset_data"
+            app:key="@string/preference_key_reset_data"
             app:summary="Delete all bookmarked cities"
             app:title="@string/reset_data_title" />
 
@@ -31,22 +31,17 @@
     <PreferenceCategory>
         <Preference
             app:icon="@drawable/ic_help"
-            app:key="help"
+            app:key="@string/preference_key_help"
             app:title="@string/help" />
 
         <Preference
-            app:icon="@drawable/ic_share"
-            app:key="share"
-            app:title="@string/share" />
-
-        <Preference
             app:icon="@drawable/ic_privacy"
-            app:key="Privacy"
+            app:key="@string/preference_key_privacy"
             app:title="@string/privacy" />
 
         <Preference
             app:icon="@drawable/ic_contact"
-            app:key="contact_us"
+            app:key="@string/preference_key_contact_us"
             app:title="@string/contact_us" />
 
     </PreferenceCategory>
@@ -55,12 +50,12 @@
 
         <Preference
             app:icon="@drawable/ic_open_source"
-            app:key="open_source"
+            app:key="@string/preference_key_open_source"
             app:title="@string/open_source" />
 
         <Preference
             app:icon="@drawable/ic_about"
-            app:key="about"
+            app:key="@string/preference_key_about"
             app:title="@string/about" />
 
     </PreferenceCategory>

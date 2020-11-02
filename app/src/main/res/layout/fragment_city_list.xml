@@ -17,14 +17,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_add_location" />
 
-        <SearchView
-            android:id="@+id/citySearchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search for a city"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchRecyclerView"
             android:layout_width="match_parent"
@@ -35,7 +27,7 @@
             android:background="?attr/colorPrimary"
             android:elevation="5dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/citySearchView"
+            app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="3"
             tools:listitem="@layout/item_city_search" />
 
@@ -50,7 +42,7 @@
             android:textAppearance="?attr/textAppearanceBody2"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/searchRecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/citySearchView" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cityListRecyclerview"
@@ -61,7 +53,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/citySearchView"
+            app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="10"
             tools:listitem="@layout/item_city" />
     </androidx.constraintlayout.widget.ConstraintLayout>

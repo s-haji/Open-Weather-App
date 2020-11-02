@@ -51,5 +51,15 @@
     <string name="contact_us">Contact Us</string>
     <string name="open_source">Open Source Libraries</string>
     <string name="about">About</string>
-    <string name="web_url">https://htmlpreview.github.io/?https://github.com/suada-haji/Open-Weather-App/blob/master/docs/HelpCenter.html</string>
+    <string name="help_web_url">https://rawcdn.githack.com/suada-haji/Open-Weather-App/86cf91c3f0f2dd3f0aa850aba5747eafe819512c/docs/HelpCenter.html</string>
+    <string name="preference_key_help">help</string>
+    <string name="preference_key_privacy">privacy</string>
+    <string name="preference_key_contact_us">contact_us</string>
+    <string name="preference_key_open_source">open_source</string>
+    <string name="preference_key_about">about</string>
+    <string name="preference_key_reset_data">reset_data</string>
+    <string name="preference_key_units">units</string>
+    <string name="preference_key_theme">theme</string>
+    <string name="search">Search</string>
+    <string name="content_description_search">Description For Search</string>
 </resources>

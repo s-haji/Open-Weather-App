@@ -3,6 +3,7 @@ package com.suadahaji.weatherapp.di
 import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.suadahaji.weatherapp.data.api.WeatherApiService
+import com.suadahaji.weatherapp.util.enableTls12OnPreLollipop
 import com.suadahaji.weatherapp.util.isNetworkAvailable
 import dagger.Module
 import dagger.Provides
@@ -14,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+
 @Module
 object NetworkModule {
     @JvmStatic
@@ -22,7 +24,7 @@ object NetworkModule {
     fun provideOkHttpClient(
         context: Context
     ): OkHttpClient {
-        return OkHttpClient.Builder()
+        val client = OkHttpClient.Builder()
             .followRedirects(true)
             .followSslRedirects(true)
             .retryOnConnectionFailure(true)
@@ -55,7 +57,8 @@ object NetworkModule {
             }
             .readTimeout(100, TimeUnit.SECONDS)
             .connectTimeout(100, TimeUnit.SECONDS)
-            .build()
+
+        return enableTls12OnPreLollipop(client).build()
     }
 
     @JvmStatic
