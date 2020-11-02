@@ -133,7 +133,6 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
                     newText?.let {
                         if (newText.isEmpty()) {
                             setAdapter(emptyList())
-                            emptySearch.visibility = View.GONE
                             searchRecyclerView.visibility = View.GONE
                         }
                     }
@@ -151,11 +150,14 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
                             viewModel.searchCities.observe(viewLifecycleOwner, Observer {
                                 setAdapter(it)
                                 if (it.isNotEmpty()) {
-                                    emptySearch.visibility = View.GONE
                                     searchRecyclerView.visibility = View.VISIBLE
                                     searchRecyclerView.bringToFront()
                                 } else {
-                                    emptySearch.visibility = View.VISIBLE
+                                    Toast.makeText(
+                                        activity,
+                                        getString(R.string.error_fetch_city),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                     searchRecyclerView.visibility = View.GONE
                                 }
                             })
