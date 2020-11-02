@@ -17,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -89,6 +90,10 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    implementation 'com.airbnb.android:lottie:3.4.4'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
