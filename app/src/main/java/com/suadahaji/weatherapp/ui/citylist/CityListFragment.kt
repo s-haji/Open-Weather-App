@@ -61,14 +61,21 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
 
         viewModel.fetchAllCities()
         viewModel.cities.observe(viewLifecycleOwner, Observer {
-            val adapter = CityListAdapter(this, it)
+            if (it.isNotEmpty()) {
+                emptyList.visibility = View.GONE
+                cityListRecyclerview.visibility = View.VISIBLE
+                val adapter = CityListAdapter(this, it)
 
-            val dividerItemDecoration = DividerItemDecoration(
-                cityListRecyclerview.context,
-                LinearLayoutManager.VERTICAL
-            )
-            cityListRecyclerview.addItemDecoration(dividerItemDecoration)
-            cityListRecyclerview.adapter = adapter
+                val dividerItemDecoration = DividerItemDecoration(
+                    cityListRecyclerview.context,
+                    LinearLayoutManager.VERTICAL
+                )
+                cityListRecyclerview.addItemDecoration(dividerItemDecoration)
+                cityListRecyclerview.adapter = adapter
+            } else {
+                emptyList.visibility = View.VISIBLE
+                cityListRecyclerview.visibility = View.GONE
+            }
         })
     }
 

@@ -43,5 +43,10 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="10"
             tools:listitem="@layout/item_city" />
+
+        <include
+            layout="@layout/empty_cities_list"
+            android:id="@+id/emptyList"
+            android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
