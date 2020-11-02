@@ -57,12 +57,10 @@ class WebViewFragment : Fragment(), Injectable, HasAndroidInjector {
     }
 
     private fun getUrl(): String {
-        return when (args.title) {
-            getString(R.string.preference_key_privacy) -> getString(R.string.help_web_url)
+        return when (args.preferenceId) {
+            getString(R.string.preference_key_privacy) -> getString(R.string.privacy_url)
 
-            getString(R.string.preference_key_open_source) -> getString(R.string.help_web_url)
-
-            getString(R.string.preference_key_about) -> getString(R.string.help_web_url)
+            getString(R.string.preference_key_open_source) -> getString(R.string.open_source_url)
 
             else -> getString(R.string.help_web_url)
         }

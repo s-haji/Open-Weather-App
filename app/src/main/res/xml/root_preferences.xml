@@ -55,8 +55,8 @@
 
         <Preference
             app:icon="@drawable/ic_about"
-            app:key="@string/preference_key_about"
-            app:title="@string/about" />
+            app:key="@string/preference_key_version"
+            app:title="@string/version" />
 
     </PreferenceCategory>
 

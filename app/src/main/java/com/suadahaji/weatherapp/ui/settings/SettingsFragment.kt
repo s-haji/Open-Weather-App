@@ -11,6 +11,7 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.suadahaji.weatherapp.BuildConfig
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.di.Injectable
 import dagger.android.AndroidInjector
@@ -79,10 +80,13 @@ class SettingsFragment : PreferenceFragmentCompat(), Injectable, HasAndroidInjec
             true
         }
 
+        findPreference<Preference>(getString(R.string.preference_key_version))!!.title =
+            getString(R.string.version__format, BuildConfig.VERSION_NAME)
+
         getWebView(getString(R.string.preference_key_help), getString(R.string.help))
-        getWebView(getString(R.string.preference_key_privacy),getString(R.string.privacy))
-        getWebView(getString(R.string.preference_key_open_source),getString(R.string.open_source))
-        getWebView(getString(R.string.preference_key_about),getString(R.string.about))
+        getWebView(getString(R.string.preference_key_privacy), getString(R.string.privacy))
+        getWebView(getString(R.string.preference_key_open_source), getString(R.string.open_source))
+
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
@@ -92,7 +96,10 @@ class SettingsFragment : PreferenceFragmentCompat(), Injectable, HasAndroidInjec
     private fun getWebView(key: String, title: String) {
         findPreference<Preference>(key)!!.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
-                val action = SettingsFragmentDirections.actionSettingsFragmentToWebViewFragment(key, title)
+                val action = SettingsFragmentDirections.actionSettingsFragmentToWebViewFragment(
+                    key,
+                    title
+                )
                 findNavController().navigate(action)
                 true
             }
