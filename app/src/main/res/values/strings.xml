@@ -50,16 +50,19 @@
     <string name="privacy">Privacy</string>
     <string name="contact_us">Contact Us</string>
     <string name="open_source">Open Source Libraries</string>
-    <string name="about">About</string>
+    <string name="version">Version</string>
     <string name="help_web_url">https://rawcdn.githack.com/suada-haji/Open-Weather-App/86cf91c3f0f2dd3f0aa850aba5747eafe819512c/docs/HelpCenter.html</string>
+    <string name="privacy_url">https://rawcdn.githack.com/suada-haji/Open-Weather-App/b7118170eb2aca6a6e5366262acd2ab6a7e58333/docs/Privacy.html</string>
+    <string name="open_source_url">https://rawcdn.githack.com/suada-haji/Open-Weather-App/b7118170eb2aca6a6e5366262acd2ab6a7e58333/docs/OpenSource.html</string>
     <string name="preference_key_help">help</string>
     <string name="preference_key_privacy">privacy</string>
     <string name="preference_key_contact_us">contact_us</string>
     <string name="preference_key_open_source">open_source</string>
-    <string name="preference_key_about">about</string>
+    <string name="preference_key_version">version</string>
     <string name="preference_key_reset_data">reset_data</string>
     <string name="preference_key_units">units</string>
     <string name="preference_key_theme">theme</string>
     <string name="search">Search</string>
     <string name="content_description_search">Description For Search</string>
+    <string name="version__format">Version %s</string>
 </resources>
