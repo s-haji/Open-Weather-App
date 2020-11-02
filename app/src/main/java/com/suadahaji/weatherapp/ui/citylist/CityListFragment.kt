@@ -15,11 +15,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.data.api.WeatherResponse
 import com.suadahaji.weatherapp.data.models.CityModel
 import com.suadahaji.weatherapp.di.Injectable
 import com.suadahaji.weatherapp.util.UNITS
+import com.suadahaji.weatherapp.util.isNetworkAvailable
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -53,7 +55,6 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         fab.bringToFront()
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_CityListFragment_to_AddCityFragment)
@@ -147,29 +148,39 @@ class CityListFragment : Fragment(), Injectable, HasAndroidInjector,
                 }
 
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    query?.let {
-                        if (query.isNotEmpty()) {
-                            val preference = PreferenceManager.getDefaultSharedPreferences(context)
-                            val units =
-                                preference.getString(UNITS, getString(R.string.unit_default))
-                            viewModel.setQuery(query, units)
-                            viewModel.searchCities()
-                            viewModel.searchCities.observe(viewLifecycleOwner, Observer {
-                                setAdapter(it)
-                                if (it.isNotEmpty()) {
-                                    searchRecyclerView.visibility = View.VISIBLE
-                                    searchRecyclerView.bringToFront()
-                                } else {
-                                    Toast.makeText(
-                                        activity,
-                                        getString(R.string.error_fetch_city),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    searchRecyclerView.visibility = View.GONE
-                                }
-                            })
+                    if (isNetworkAvailable(requireContext())) {
+                        query?.let {
+                            if (query.isNotEmpty()) {
+                                val preference =
+                                    PreferenceManager.getDefaultSharedPreferences(context)
+                                val units =
+                                    preference.getString(UNITS, getString(R.string.unit_default))
+                                viewModel.setQuery(query, units)
+                                viewModel.searchCities()
+                                viewModel.searchCities.observe(viewLifecycleOwner, Observer {
+                                    setAdapter(it)
+                                    if (it.isNotEmpty()) {
+                                        searchRecyclerView.visibility = View.VISIBLE
+                                        searchRecyclerView.bringToFront()
+                                    } else {
+                                        Toast.makeText(
+                                            activity,
+                                            getString(R.string.error_fetch_city),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        searchRecyclerView.visibility = View.GONE
+                                    }
+                                })
+                            }
                         }
+                    } else {
+                        Snackbar.make(
+                            contraintLayoutView,
+                            getString(R.string.check_internet),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     }
+
                     return false
                 }
             })

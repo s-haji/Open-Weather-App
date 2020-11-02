@@ -12,6 +12,7 @@ import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
+
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
     private lateinit var navController: NavController
 
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         navController = Navigation.findNavController(this, R.id.nav_host)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        PreferenceManager.setDefaultValues(this,R.xml.root_preferences, false)
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
     }
 
     override fun onSupportNavigateUp(): Boolean {

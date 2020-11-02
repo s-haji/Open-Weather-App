@@ -19,13 +19,16 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.suadahaji.weatherapp.R
 import com.suadahaji.weatherapp.di.Injectable
 import com.suadahaji.weatherapp.util.TAG
 import com.suadahaji.weatherapp.util.UNITS
+import com.suadahaji.weatherapp.util.isNetworkAvailable
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import kotlinx.android.synthetic.main.fragment_add_city.*
 import javax.inject.Inject
 
 class AddCityFragment : Fragment(), Injectable, HasAndroidInjector, OnMapReadyCallback,
@@ -69,22 +72,29 @@ class AddCityFragment : Fragment(), Injectable, HasAndroidInjector, OnMapReadyCa
 
         val preference = PreferenceManager.getDefaultSharedPreferences(context)
         val units = preference.getString(UNITS, getString(R.string.unit_default))
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.setQuery(latLng.latitude.toString(), latLng.longitude.toString(), units)
+            viewModel.fetchCityWeather()
 
-        viewModel.setQuery(latLng.latitude.toString(), latLng.longitude.toString(), units)
-        viewModel.fetchCityWeather()
-
-        viewModel.weather.observe(viewLifecycleOwner, Observer {
-            if (it.name.isNotEmpty()) {
-                findNavController().navigate(
-                    AddCityFragmentDirections.actionAddCityFragmentToCityDetailFragment(
-                        it.id
+            viewModel.weather.observe(viewLifecycleOwner, Observer {
+                if (it.name.isNotEmpty()) {
+                    findNavController().navigate(
+                        AddCityFragmentDirections.actionAddCityFragmentToCityDetailFragment(
+                            it.id
+                        )
                     )
-                )
-                Log.d(TAG, "onMapClick: $it")
-            } else {
-                Toast.makeText(activity, "Select a city", Toast.LENGTH_SHORT).show()
-            }
-        })
+                    Log.d(TAG, "onMapClick: $it")
+                } else {
+                    Toast.makeText(activity, "Select a city", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            Snackbar.make(
+                mapView,
+                getString(R.string.check_internet),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun androidInjector(): AndroidInjector<Any> {

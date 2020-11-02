@@ -60,6 +60,7 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
         try {
             _status.value = NetworkState.LOADING
             val request = mainRepository.fetchAllCities()
+            _status.value = NetworkState.SUCCESS
             _cities.value = request
         } catch (e: Exception) {
             _status.value = NetworkState.error(e.message ?: "Unknown error")
@@ -78,10 +79,12 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
 
     fun searchCities() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
         try {
+            _status.value = NetworkState.LOADING
             val request = mainRepository.fetchCities(_cityName.value!!, _units.value!!)
             _searchCities.value = request.body()?.list
+            _status.value = NetworkState.SUCCESS
         } catch (e: Exception) {
-            Log.e(TAG, "searchCities error: ${e.message}")
+            _status.value = NetworkState.error(e.message ?: "Unknown error")
         }
     }
 
