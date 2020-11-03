@@ -55,7 +55,6 @@ Libraries Used
   multidex and automated testing.
   * [AppCompat][1] - Degrade gracefully on older versions of Android.
   * [Android KTX][2] - Write more concise, idiomatic Kotlin code.
-  * [Test][4] - An Android testing framework for unit and runtime UI tests.
 * [Architecture][10] - A collection of libraries that help you design robust, testable, and
   maintainable apps. Start with classes for managing your UI component lifecycle and handling data
   persistence.
@@ -80,7 +79,6 @@ Libraries Used
 [0]: https://developer.android.com/jetpack/components
 [1]: https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat
 [2]: https://developer.android.com/kotlin/ktx
-[4]: https://developer.android.com/training/testing/
 [10]: https://developer.android.com/jetpack/arch/
 [11]: https://developer.android.com/topic/libraries/data-binding/
 [12]: https://developer.android.com/topic/libraries/architecture/lifecycle
@@ -123,22 +121,3 @@ implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
