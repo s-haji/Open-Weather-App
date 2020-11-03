@@ -22,4 +22,5 @@ app/mapping.txt
 app/release/
 app/seeds.txt
 app/unused.txt
-
+app/google-services.json
+signing.properties

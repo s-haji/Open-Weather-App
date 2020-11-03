@@ -4,9 +4,16 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
+def keystorePropertiesFile = rootProject.file("signing.properties");
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists())
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
+
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
@@ -14,10 +21,13 @@ android {
         applicationId "com.suadahaji.weatherapp"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 1
+        versionCode 3
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
+        ndk {
+            debugSymbolLevel 'SYMBOL_TABLE'
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,11 +36,21 @@ android {
         dataBinding = true
     }
 
+    signingConfigs {
+        release {
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
+    }
+
     buildTypes {
         release {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -69,7 +89,7 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation ("com.squareup.okhttp3:okhttp:3.12.12"){
+    implementation("com.squareup.okhttp3:okhttp:3.12.12") {
         force = true //API 19 support
     }
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit_coroutine_version"
@@ -99,5 +119,9 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Firebase Analytics
+    implementation platform('com.google.firebase:firebase-bom:26.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
 }

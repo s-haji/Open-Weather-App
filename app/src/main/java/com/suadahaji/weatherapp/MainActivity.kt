@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.preference.PreferenceManager
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -14,6 +15,8 @@ import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
+    private lateinit var mFirebaseAnalytics: FirebaseAnalytics
+
     private lateinit var navController: NavController
 
     @Inject
@@ -28,6 +31,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         NavigationUI.setupActionBarWithNavController(this, navController)
 
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {
