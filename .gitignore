@@ -18,4 +18,8 @@ app/src/release/
 app/src/main/cpp/native-lib.cpp
 app/lint/
 lint/
+app/mapping.txt
+app/release/
+app/seeds.txt
+app/unused.txt
 
