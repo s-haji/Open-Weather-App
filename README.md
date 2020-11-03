@@ -97,7 +97,7 @@ Libraries Used
 [94]: https://github.com/airbnb/lottie-android
 
 
-##### With this app you  will be able to : 
+#### With this app you  will be able to : 
   - See a list of cities you've bookmarked
   - Delete a city/cities
   - Add cities
