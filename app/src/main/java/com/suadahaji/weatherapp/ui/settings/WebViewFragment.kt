@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebSettings
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -69,6 +70,8 @@ class WebViewFragment : Fragment(), Injectable, HasAndroidInjector {
     }
 
     private fun loadWebView() {
+        progressBar.bringToFront()
+        progressBar.visibility = View.VISIBLE
         emptyList.visibility = View.GONE
         activity?.runOnUiThread {
             webView.settings.javaScriptEnabled = true
@@ -79,7 +82,12 @@ class WebViewFragment : Fragment(), Injectable, HasAndroidInjector {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 webView.settings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE;
             }
-            webView.webViewClient = object : WebViewClient() {}
+            webView.webViewClient = object : WebViewClient() {
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+                    progressBar.visibility = View.GONE
+                }
+            }
             webView.loadUrl(getUrl())
         }
     }
