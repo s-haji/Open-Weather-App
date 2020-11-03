@@ -43,15 +43,13 @@ Here’s a sample app that is setup for you to take a look at and get started [S
 ### Screenshots
 
 
-| ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/home1.png) | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/search1.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/search2.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/addCity2.png)  |
-| ------ | ------ |------ |------ |
+| ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/home1.png) | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/search1.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/search2.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/addCity2.png)  |![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/cityDetail.png)  |![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/cityList.png) |
+| ------ | ------ |------ |------ |------ |------ |
 
-| ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/cityDetail.png)  |![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/cityList.png) | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settings.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settingTheme.png)  |
-| ------ | ------ |------ |------ |
+| ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settings.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settingTheme.png)  |![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/deleteCities.png) | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settingsUnits.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settingsHelp.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settingsNoInternet.png)  |
+| ------ | ------ |------ |------ |------ |------ |
 
 
-| ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/deleteCities.png) | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settingsUnits.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settingsHelp.png)  | ![](https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/settingsNoInternet.png)  |
-| ------ | ------ |------ |------ |
 
 
 ##### With this app you  will be able to : 
