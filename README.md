@@ -5,7 +5,12 @@ A simple weather app illustrating Android Development best practices with **Andr
 This project uses the Gradle build system. To build this project, use the gradlew build command or use **Import Project** in Android Studio.
 
 #### Open Weather API Key
+To generate the **OpenWeatherMap API Key**: 
+* [Sign up][95] on OpenWeatherMap.
+* After login visit **API keys** tab and copy the API key
+
 I wrote a short C++ code to store the API key securely, and access it from the  **C++** file. 
+
 **Step 1: Install the required tools**
 You'll need to install 3 tools in Android Studio via the SDK Manager:
 * **NDK (Native Development Kit)**: This is a tool that is used to work with C/C++ code in Android. It also lets you access certain device components, such as sensors, touch input, etc.
@@ -95,6 +100,7 @@ Libraries Used
 [92]: https://github.com/square/retrofit
 [93]: https://github.com/google/dagger
 [94]: https://github.com/airbnb/lottie-android
+[95]: https://home.openweathermap.org/users/sign_up
 
 
 #### With this app you  will be able to : 
