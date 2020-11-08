@@ -53,7 +53,7 @@
     <string name="version">Version</string>
     <string name="help_web_url">https://openweatherhelp.netlify.app/</string>
     <string name="privacy_url">https://openweatherprivacy.netlify.app/</string>
-    <string name="open_source_url">https://openweatherlibraries.netlify.app/</string>
+    <string name="open_source_url">https://weatheropensource.netlify.app/</string>
     <string name="preference_key_help">help</string>
     <string name="preference_key_privacy">privacy</string>
     <string name="preference_key_contact_us">contact_us</string>
