@@ -1,6 +1,8 @@
 ## Android Weather App 
 A simple weather app illustrating Android Development best practices with **Android Jetpack**.
 
+[<img src="https://raw.githubusercontent.com/suada-haji/Open-Weather-App/master/screenshots/google-play-download-android-app.svg" width="250"/>](https://play.google.com/store/apps/details?id=com.suadahaji.weatherapp)
+
 #### Getting Started
 This project uses the Gradle build system. To build this project, use the gradlew build command or use **Import Project** in Android Studio.
 
