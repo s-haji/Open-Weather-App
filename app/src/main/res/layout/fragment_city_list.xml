@@ -25,6 +25,7 @@
                 android:elevation="5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UnusedAttribute"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_city_search" />
 
@@ -51,10 +52,11 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
             android:layout_gravity="end|bottom"
-            app:srcCompat="@drawable/ic_add_location"
-            app:layout_anchorGravity="bottom|right|end" />
+            android:layout_margin="@dimen/fab_margin"
+            android:contentDescription="@string/add_city_icon_desc"
+            app:layout_anchorGravity="bottom|right|end"
+            app:srcCompat="@drawable/ic_add_location" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

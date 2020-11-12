@@ -45,6 +45,7 @@ class CityDetailViewModel @Inject constructor(private val mainRepository: MainRe
     }
 
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     @SuppressLint("SimpleDateFormat")
     fun fetchCityWeather() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
         try {

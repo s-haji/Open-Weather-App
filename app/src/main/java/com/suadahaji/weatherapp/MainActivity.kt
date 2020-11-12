@@ -3,7 +3,7 @@ package com.suadahaji.weatherapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.preference.PreferenceManager
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        navController = Navigation.findNavController(this, R.id.nav_host)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        navController = navHostFragment.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
 
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)

@@ -30,7 +30,7 @@ open class GlideUtils : AppGlideModule() {
         sslContext.init(null, arrayOf(unsafeTrustManager), null)
         return OkHttpClient.Builder()
             .sslSocketFactory(sslContext.socketFactory, unsafeTrustManager)
-            .hostnameVerifier { hostName, sslSession -> true }
+            .hostnameVerifier { _, _ -> true }
             .build()
     }
 }

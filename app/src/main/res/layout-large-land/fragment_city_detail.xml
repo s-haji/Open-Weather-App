@@ -71,21 +71,22 @@
                 android:id="@+id/weatherDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
                 android:textAppearance="@style/TextAppearance.Weather.Body1"
                 android:textSize="24sp"
                 app:capitalizeSentence="@{cityViewModel.forecast.forecasts[0].weather[0].description}"
                 app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
                 app:layout_constraintEnd_toEndOf="@id/cityWeather"
-                android:layout_marginStart="20dp"
                 app:layout_constraintStart_toStartOf="@id/cityWeather"
                 app:layout_constraintTop_toBottomOf="@id/cityTemp"
-                tools:text="broken clouds"
-                android:layout_marginLeft="20dp" />
+                tools:text="broken clouds" />
 
             <ImageView
                 android:id="@+id/cityWeather"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:contentDescription="@string/weather_icon_desc"
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cityName"
@@ -128,12 +129,12 @@
                 android:paddingLeft="16dp"
                 android:paddingEnd="16dp"
                 android:paddingRight="16dp"
+                android:paddingBottom="50dp"
                 app:checkVisibility="@{cityViewModel.status.status == status.SUCCESS}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/additionInfoForDays"
-                android:paddingBottom="50dp"
                 tools:itemCount="5"
                 tools:listitem="@layout/item_daily_weather" />
 
