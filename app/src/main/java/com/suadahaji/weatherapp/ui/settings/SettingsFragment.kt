@@ -96,7 +96,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Injectable, HasAndroidInjec
                     )
                     putExtra(Intent.EXTRA_SUBJECT, "Report a Problem")
                 }
-                if (activity?.packageManager?.let { it1 -> intent.resolveActivity(it1) } != null) {
+                if (intent.resolveActivity((requireActivity().packageManager) ) != null) {
                     startActivity(intent)
                 }
                 true

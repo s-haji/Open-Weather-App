@@ -1,6 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Weather</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="add_city_label">Add City</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
@@ -35,22 +34,18 @@
     <string name="settings">Settings</string>
     <string name="help">Help</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="support_header">Support</string>
-
-    <!-- Messages Preferences -->
-    <string name="reset_data_title">Delete Bookmarks</string>
+    <!-- Preference -->
     <string name="theme_title">Theme</string>
     <string name="unit_title">Temperature Units</string>
-    <string name="unit_default">metric</string>
-    <string name="reset_data">This will delete all bookmarked cities.</string>
-    <string name="reset_data_accept">Accept</string>
     <string name="share">Share</string>
     <string name="privacy">Privacy</string>
     <string name="contact_us">Report a Problem</string>
     <string name="open_source">Open Source Libraries</string>
     <string name="version">Version</string>
+    <string name="reset_data_title">Delete Bookmarks</string>
+    <string name="unit_default">metric</string>
+    <string name="reset_data">This will delete all bookmarked cities.</string>
+    <string name="reset_data_accept">Accept</string>
     <string name="help_web_url">https://openweatherhelp.netlify.app/</string>
     <string name="privacy_url">https://openweatherprivacy.netlify.app/</string>
     <string name="open_source_url">https://weatheropensource.netlify.app/</string>
@@ -69,4 +64,10 @@
     <string name="error_fetch_city">City not found</string>
     <string name="check_internet">Please check your internet settings</string>
     <string name="internet_error_label">No internet connection</string>
+
+    <string name="weather_icon_desc">Weather icon</string>
+    <string name="add_city_icon_desc">Add City</string>
+    <string name="empty_list_label">No saved cities yet</string>
+    <string name="empty_list_description">Tap the button below to add!</string>
+    <string name="retry_label">Retry</string>
 </resources>

@@ -43,19 +43,6 @@ class CityListViewModel @Inject constructor(private val mainRepository: MainRepo
         city.value = cityModel
     }
 
-
-    fun fetchCityWeather() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
-        try {
-            _status.value = NetworkState.LOADING
-            val request = mainRepository.fetchCityWeatherByName(
-                _cityName.value!!,
-                _units.value!!
-            )
-        } catch (e: Exception) {
-            _status.value = NetworkState.error(e.message ?: "Unknown error")
-        }
-    }
-
     fun fetchAllCities() = CoroutineScope(viewModelJob + Dispatchers.Main).launch {
         try {
             _status.value = NetworkState.LOADING

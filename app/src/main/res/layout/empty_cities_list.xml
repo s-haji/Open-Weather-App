@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/rubik_medium"
         android:gravity="center_horizontal"
-        android:text="No saved cities yet"
+        android:text="@string/empty_list_label"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceBody1"
         android:textSize="28sp"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:gravity="center_horizontal"
-        android:text="Tap the button below to add!"
+        android:text="@string/empty_list_description"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceSubtitle1"
         app:layout_constraintTop_toBottomOf="@id/emptyLabel" />
@@ -44,15 +44,15 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/retryBtn"
         android:layout_width="wrap_content"
-        android:text="Retry"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/retry_label"
         android:textColor="@android:color/white"
         android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_marginTop="10dp"
         app:backgroundTint="@color/weather_700"
-        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emptyDescription" />
+        app:layout_constraintTop_toBottomOf="@id/emptyDescription"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.suadahaji.weatherapp.util
 
 import android.annotation.SuppressLint

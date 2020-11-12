@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.suadahaji.weatherapp.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -37,10 +40,11 @@ fun enableTls12OnPreLollipop(client: OkHttpClient.Builder): OkHttpClient.Builder
     sslContext.init(null, arrayOf(unsafeTrustManager), null)
 
     client.sslSocketFactory(sslContext.socketFactory, unsafeTrustManager)
-    client.hostnameVerifier { hostName, sslSession -> true }
+    client.hostnameVerifier { _, _ -> true }
     return client
 }
 
+@SuppressLint("TrustAllX509TrustManager")
 fun createUnsafeTrustManager(): X509TrustManager {
     return object : X509TrustManager {
         override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {

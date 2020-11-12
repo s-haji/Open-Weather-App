@@ -40,9 +40,5 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="ThemeOverlay.App.Button" parent="">
-        <item name="colorPrimary">@android:color/holo_red_light</item>
-    </style>
-
     <color name="immersive_sys_ui">#33000000</color>
 </resources>
