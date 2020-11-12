@@ -125,8 +125,3 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
 }
-
-tasks.register("runOnGitHub") { // 1
-    dependsOn(":app:lint", ":app:testDebugUnitTest")  // 2 ==> CUSTOMIZE THIS LINE
-    group = "custom"      // 3
-}
