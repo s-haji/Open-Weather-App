@@ -7,7 +7,7 @@ import com.suadahaji.weatherapp.data.models.extras.Main
 import com.suadahaji.weatherapp.data.models.extras.Weather
 import com.suadahaji.weatherapp.data.models.extras.WeatherSys
 
-data class WeatherResponse (
+data class WeatherResponse(
     @field:SerializedName("weather")
     val weather: List<Weather>,
     @field:SerializedName("main")
